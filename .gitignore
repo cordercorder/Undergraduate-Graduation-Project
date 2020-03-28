@@ -1,0 +1,8 @@
+data/
+final_tests/
+lang_vecs/
+train_logs/
+util-scripts/
+bible_model_final_appended.log
+run.sh
+runeval.sh
