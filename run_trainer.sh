@@ -6,9 +6,9 @@ python -u trainer.py \
     --input_dim=256 \
     --hidden_dim=256 \
     --minibatch_size=32 \
+    --percent_valid=1000 \
     --reader_mode=parallel \
-    --percent_valid=6 \
-    --train_src=/data/rrjin/Graduation/data/bible-corpus/train_data/train_src_zh.txt \
+    --train_src=/data/rrjin/Graduation/data/bible-corpus/train_data/train_src_fr.txt \
     --train_tgt=/data/rrjin/Graduation/data/bible-corpus/train_data/train_tgt_en.txt \
     --trainer=adam \
     --save=bible_model_final \

@@ -23,6 +23,13 @@
           </mappings>
         </serverdata>
       </paths>
+      <paths name="rrjin@192.168.126.164:22 (2)">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/data/rrjin/Graduation" local="$PROJECT_DIR$" />
+          </mappings>
+        </serverdata>
+      </paths>
     </serverData>
     <option name="myAutoUpload" value="ALWAYS" />
   </component>

@@ -5,7 +5,7 @@ from itertools import count
 import numpy as np
 import math, ast, os, codecs, string
 from subprocess import call
-import cPickle as pickle
+import pickle
 import sys, io, glob
 import matplotlib
 matplotlib.use("Agg")
@@ -211,11 +211,11 @@ class Vocab(object):
             "START_TOK":self.START_TOK,
             "END_TOK":self.END_TOK
         }
-        with open(filename, "w") as f: pickle.dump(info_dict, f)
+        with open(filename, "wb") as f: pickle.dump(info_dict, f)
 
     @classmethod
     def load(cls, filename):
-        with open(filename, "r") as f:
+        with open(filename, "rb") as f:
             info_dict = pickle.load(f)
             v = Vocab()
             v.tokens = info_dict["tokens"]

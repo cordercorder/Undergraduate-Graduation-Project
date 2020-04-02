@@ -12,5 +12,5 @@ python -u trainer.py \
     --train_tgt=/data/rrjin/Graduation/data/bible-corpus/train_data/part_of_train_tgt_en.txt \
     --trainer=adam \
     --log_valid_every_n=200 \
-    --save=bible_model_final \
-    --log_output=bible_model_final_appended.log
+    --save=test_bible_model_final \
+    --log_output=test_bible_model_final_appended.log

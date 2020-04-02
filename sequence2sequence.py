@@ -1,17 +1,14 @@
 #encoding: :utf-8
 from  __future__ import absolute_import, print_function, unicode_literals
-from itertools import izip
 from nltk.translate.bleu_score import corpus_bleu, sentence_bleu
-from kitchen.text.converters import getwriter
 import dynet
 import random, math, os, util
 import numpy as np
-import cPickle as pickle
+import pickle
 import sys
-reload(sys)
-sys.setdefaultencoding("utf-8")
-UTF8Writer = getwriter('utf8')
-sys.stdout = UTF8Writer(sys.stdout)
+
+
+
 
 class Seq2SeqTemplate(object):
     name = "template"
@@ -651,6 +648,7 @@ class Seq2SeqBiRNNAttn(Seq2SeqBasic):
 
                 # add the score of the current hypothesis to p_t
                 new_hyp_scores = hyp.score + p_t
+                print(type(new_hyp_scores), hyp.score, p_t)
                 new_hyp_scores_list.append(new_hyp_scores)
 
             live_nyp_num = beam_size - len(completed_hypotheses)
@@ -661,7 +659,9 @@ class Seq2SeqBiRNNAttn(Seq2SeqBasic):
             new_hyp_scores = new_hyp_scores[new_hyp_pos]
             new_hypotheses = []
 
+            print("prev_hyp_ids is :", prev_hyp_ids)
             for prev_hyp_id, word_id, hyp_score in zip(prev_hyp_ids, word_ids, new_hyp_scores):
+                print(prev_hyp_id)
                 prev_hyp = hypotheses[prev_hyp_id]
                 alpha = [np.copy(a) for a in prev_hyp.alpha]
                 hyp = Hypothesis(state=prev_hyp.state,

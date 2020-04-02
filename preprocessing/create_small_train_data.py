@@ -1,7 +1,5 @@
 import os
-import sys
-reload(sys)
-sys.setdefaultencoding("utf-8")
+
 source = "/data/rrjin/Graduation/data/bible-corpus/train_data"
 
 src = "train_src_zh.txt"

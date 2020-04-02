@@ -6,3 +6,6 @@ util-scripts/
 bible_model_final_appended.log
 run.sh
 runeval.sh
+bible_model_final.checkpoint/
+bible_model_final/
+final_tests_fr_to_en/
