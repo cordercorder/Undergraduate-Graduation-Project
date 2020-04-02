@@ -57,7 +57,7 @@ class Seq2SeqBasic(Seq2SeqTemplate):
         self.src_vocab.save(path+"/vocab.src")
         self.tgt_vocab.save(path+"/vocab.tgt")
         self.m.save(path+"/params")
-        with open(path+"/args", "w") as f: pickle.dump(self.args, f)
+        with open(path+"/args", "wb") as f: pickle.dump(self.args, f)
 
     @classmethod
     def load(cls, model, train_data_src, train_data_tgt, path):
@@ -648,20 +648,17 @@ class Seq2SeqBiRNNAttn(Seq2SeqBasic):
 
                 # add the score of the current hypothesis to p_t
                 new_hyp_scores = hyp.score + p_t
-                print(type(new_hyp_scores), hyp.score, p_t)
                 new_hyp_scores_list.append(new_hyp_scores)
 
             live_nyp_num = beam_size - len(completed_hypotheses)
             new_hyp_scores = np.concatenate(new_hyp_scores_list).flatten()
             new_hyp_pos = (-new_hyp_scores).argsort()[:live_nyp_num]
-            prev_hyp_ids = new_hyp_pos / self.tgt_vocab.size
+            prev_hyp_ids = new_hyp_pos // self.tgt_vocab.size
             word_ids = new_hyp_pos % self.tgt_vocab.size
             new_hyp_scores = new_hyp_scores[new_hyp_pos]
             new_hypotheses = []
 
-            print("prev_hyp_ids is :", prev_hyp_ids)
             for prev_hyp_id, word_id, hyp_score in zip(prev_hyp_ids, word_ids, new_hyp_scores):
-                print(prev_hyp_id)
                 prev_hyp = hypotheses[prev_hyp_id]
                 alpha = [np.copy(a) for a in prev_hyp.alpha]
                 hyp = Hypothesis(state=prev_hyp.state,
