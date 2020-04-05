@@ -9,3 +9,5 @@ runeval.sh
 bible_model_final.checkpoint/
 bible_model_final/
 final_tests_fr_to_en/
+test_dyet.sh
+test_dynet.py

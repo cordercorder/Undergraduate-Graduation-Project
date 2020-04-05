@@ -1,4 +1,4 @@
-export LD_LIBRARY_PATH=/home/rrjin/anaconda3/envs/ml2/lib/:$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=/home/rrjin/anaconda3/envs/ml/lib/:$LD_LIBRARY_PATH
 
 python -u trainer.py \
     --dynet-mem 10000 \
@@ -11,5 +11,5 @@ python -u trainer.py \
     --train_src=/data/rrjin/Graduation/data/bible-corpus/train_data/train_src_fr.txt \
     --train_tgt=/data/rrjin/Graduation/data/bible-corpus/train_data/train_tgt_en.txt \
     --trainer=adam \
-    --save=bible_model_final \
-    --log_output=bible_model_final_appended.log
+    --save=bible_model_final_fr_to_en_py3.7 \
+    --log_output=bible_model_final_appended_fr_to_en_py3.7.log
