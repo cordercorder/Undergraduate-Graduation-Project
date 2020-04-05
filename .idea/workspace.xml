@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ae2dd66e-565d-4824-b6e7-8ed7074dee0e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OPUS_Corpus_Spyder/Spyder.py" beforeDir="false" afterPath="$PROJECT_DIR$/OPUS_Corpus_Spider/Spider.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OPUS_Corpus_Spyder/run_Spyder.sh" beforeDir="false" afterPath="$PROJECT_DIR$/OPUS_Corpus_Spider/run_Spider.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OPUS_Corpus_Spider/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/OPUS_Corpus_Spider/README.md" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -30,8 +28,8 @@
         <entry file="file://$PROJECT_DIR$/OPUS_Corpus_Spider/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="84">
-                <caret line="31" column="24" lean-forward="true" selection-start-line="31" selection-start-column="24" selection-end-line="31" selection-end-column="24" />
+              <first_editor relative-caret-position="135">
+                <caret line="5" column="19" selection-start-line="5" selection-start-column="19" selection-end-line="5" selection-end-column="19" />
               </first_editor>
               <second_editor />
             </state>
@@ -42,7 +40,7 @@
         <entry file="file://$PROJECT_DIR$/OPUS_Corpus_Spider/run_Spider.sh">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="54">
-              <caret line="2" column="16" selection-start-line="2" selection-start-column="16" selection-end-line="2" selection-end-column="24" />
+              <caret line="2" column="24" lean-forward="true" selection-start-line="2" selection-start-column="24" selection-end-line="2" selection-end-column="24" />
             </state>
           </provider>
         </entry>
@@ -513,7 +511,7 @@
       <workItem from="1586076913118" duration="2665000" />
       <workItem from="1586079675599" duration="6770000" />
       <workItem from="1586087768620" duration="4256000" />
-      <workItem from="1586097322509" duration="1673000" />
+      <workItem from="1586097322509" duration="1937000" />
     </task>
     <servers />
   </component>
@@ -535,7 +533,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="265796000" />
+    <option name="totallyTimeSpent" value="266060000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -564,7 +562,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.32838285" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50151515" side_tool="true" weight="0.38118812" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="11" sideWeight="0.49848485" visible="true" weight="0.44059405" />
+      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.49848485" visible="true" weight="0.21947195" />
       <window_info anchor="bottom" id="Python Console" order="12" weight="0.39768976" />
       <window_info anchor="bottom" id="File Transfer" order="13" weight="0.34653464" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -572,7 +570,7 @@
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="SciView" order="3" sideWeight="0.49834985" weight="0.32954547" />
       <window_info anchor="right" id="Database" order="4" />
-      <window_info anchor="right" id="Remote Host" order="5" sideWeight="0.50165015" side_tool="true" weight="0.27727273" />
+      <window_info active="true" anchor="right" id="Remote Host" order="5" sideWeight="0.50165015" side_tool="true" visible="true" weight="0.27727273" />
     </layout>
     <layout-to-restore>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18560606" />
@@ -944,15 +942,15 @@
     <entry file="file://$PROJECT_DIR$/OPUS_Corpus_Spider/run_Spider.sh">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="54">
-          <caret line="2" column="16" selection-start-line="2" selection-start-column="16" selection-end-line="2" selection-end-column="24" />
+          <caret line="2" column="24" lean-forward="true" selection-start-line="2" selection-start-column="24" selection-end-line="2" selection-end-column="24" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/OPUS_Corpus_Spider/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="84">
-            <caret line="31" column="24" lean-forward="true" selection-start-line="31" selection-start-column="24" selection-end-line="31" selection-end-column="24" />
+          <first_editor relative-caret-position="135">
+            <caret line="5" column="19" selection-start-line="5" selection-start-column="19" selection-end-line="5" selection-end-column="19" />
           </first_editor>
           <second_editor />
         </state>

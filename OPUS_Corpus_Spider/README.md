@@ -3,7 +3,7 @@
 ### 运行环境
 首先需要安装`beautifulsoup4`, `requests`, `lxml`模块
 
-因为代码调用了`Linux`命令，所有代码只能在`Linux`环境下运行（类`Linux`例如`Mac`应该也行，但没试过）
+因为代码调用了`Linux`命令，所以代码只能在`Linux`环境下运行（类`Linux`例如`Mac`应该也行，但没试过）
 
 ## 参数简介
 
