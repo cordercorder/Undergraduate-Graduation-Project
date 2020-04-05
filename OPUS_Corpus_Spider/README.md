@@ -26,8 +26,8 @@ sh run_Spider.sh
 ```
 python -u Spider.py \
     --url http://opus.nlpl.eu/CAPES.php \
-    --output_dir /data/opus_corpus/
-    --key_words en
-    --download_url /data/download_url.txt
+    --output_dir /data/opus_corpus/ \
+    --key_words en \
+    --download_url /data/download_url.txt \
     --file_type .txt.zip
 ```

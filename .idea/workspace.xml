@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ae2dd66e-565d-4824-b6e7-8ed7074dee0e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/OPUS_Corpus_Spider/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/OPUS_Corpus_Spider/README.md" afterDir="false" />
-    </list>
+    <list default="true" id="ae2dd66e-565d-4824-b6e7-8ed7074dee0e" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,8 +26,8 @@
         <entry file="file://$PROJECT_DIR$/OPUS_Corpus_Spider/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="216">
-                <caret line="14" column="47" selection-start-line="14" selection-start-column="47" selection-end-line="14" selection-end-column="47" />
+              <first_editor relative-caret-position="297">
+                <caret line="17" column="5" lean-forward="true" selection-start-line="17" selection-start-column="5" selection-end-line="17" selection-end-column="5" />
               </first_editor>
               <second_editor />
             </state>
@@ -511,7 +509,7 @@
       <workItem from="1586076913118" duration="2665000" />
       <workItem from="1586079675599" duration="6770000" />
       <workItem from="1586087768620" duration="4256000" />
-      <workItem from="1586097322509" duration="2428000" />
+      <workItem from="1586097322509" duration="3071000" />
     </task>
     <servers />
   </component>
@@ -533,7 +531,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="266551000" />
+    <option name="totallyTimeSpent" value="267194000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -546,7 +544,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16818182" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -949,8 +946,8 @@
     <entry file="file://$PROJECT_DIR$/OPUS_Corpus_Spider/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="216">
-            <caret line="14" column="47" selection-start-line="14" selection-start-column="47" selection-end-line="14" selection-end-column="47" />
+          <first_editor relative-caret-position="297">
+            <caret line="17" column="5" lean-forward="true" selection-start-line="17" selection-start-column="5" selection-end-line="17" selection-end-column="5" />
           </first_editor>
           <second_editor />
         </state>
