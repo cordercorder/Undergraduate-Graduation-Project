@@ -25,7 +25,7 @@ def crawl():
     parser.add_argument("--url", required=True, help="需要爬取的网页的网址")
     parser.add_argument("--output_dir", default="data", help="语料库下载后的存储地址，绝对地址或相对地址均可，默认是./data")
     parser.add_argument("--key_words", default="", help="下载的语料名称中必须含有的关键字，例如en表示下载和英文相关的语料，默认全部下载")
-    parser.add_argument("--download_url", default="download_url.txt", help="把所有的下载链接都写入参数--download_url指定的文件中，绝对路径或相对路径均可，默认是./download_url.txt")
+    parser.add_argument("--download_url", default="download_url.txt", help="把所有的下载链接都写入参数--download_url指定的文件中，方便查看，绝对路径或相对路径均可，默认是./download_url.txt")
     parser.add_argument("--file_type", default="", help="需要下载的文件格式，默认全部都下载")
 
     args = parser.parse_args()
