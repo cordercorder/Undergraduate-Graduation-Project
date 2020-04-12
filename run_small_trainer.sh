@@ -1,6 +1,6 @@
-export LD_LIBRARY_PATH=/home/rrjin/anaconda3/envs/ml/lib/:$LD_LIBRARY_PATH
 python -u trainer.py \
     --dynet-mem 2000 \
+    --dynet-gpu \
     --model_type=attention \
     --input_dim=256 \
     --hidden_dim=256 \

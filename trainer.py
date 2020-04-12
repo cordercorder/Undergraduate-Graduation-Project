@@ -68,7 +68,7 @@ parser.add_argument("--results_filename", default='results')
 parser.add_argument("--beam_size", default=3, type=int)
 parser.add_argument("--minibatch_size", default=64, type=int)
 
-args = parser.parse_args()
+args, unknown = parser.parse_known_args()
 print("ARGS:", args)
 
 if args.rnn == "lstm": args.rnn = dynet.LSTMBuilder

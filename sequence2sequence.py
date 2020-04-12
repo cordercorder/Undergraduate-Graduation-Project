@@ -53,7 +53,8 @@ class Seq2SeqBasic(Seq2SeqTemplate):
         self.tgt_lookup = model.add_lookup_parameters( (tgt_vocab.size, args.input_dim))
 
     def save(self, path):
-        if not os.path.exists(path): os.makedirs(path)
+        if not os.path.isdir(path):
+            os.makedirs(path)
         self.src_vocab.save(path+"/vocab.src")
         self.tgt_vocab.save(path+"/vocab.tgt")
         self.m.save(path+"/params")
