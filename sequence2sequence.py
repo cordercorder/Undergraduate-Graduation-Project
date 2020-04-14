@@ -591,6 +591,7 @@ class Seq2SeqBiRNNAttn(Seq2SeqBasic):
         if len(translations)==0: bleu_score=0.0
         else: bleu_score = corpus_bleu(references, translations)
         f.write("BLEU SCORE:" + str(bleu_score) + "\n")
+        f.close()
     #return mean, var
 
     def beam_translate(self, src_sent, beam_size=5):
