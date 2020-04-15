@@ -1,4 +1,4 @@
-# nohup sh run_trainer.sh >./train_logs/repeat_1_combined_fr_de_log.txt 2>&1 &
+# nohup sh run_trainer.sh >./train_logs/repeat_2_combined_fr_de_log.txt 2>&1 &
 python -u trainer.py \
     --dynet-mem 3500 \
     --dynet-gpu \
@@ -13,5 +13,5 @@ python -u trainer.py \
     --trainer adam \
     --save bible_model_final_combined_fr_de \
     --log_output bible_model_final_appended_combined_fr_de.log \
-    --results_filename repeat_1_result \
+    --results_filename repeat_2_result \
     --load /data/rrjin/Graduation/bible_model_final_combined_fr_de

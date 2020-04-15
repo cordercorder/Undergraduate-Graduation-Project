@@ -12,3 +12,7 @@ final_tests_fr_to_en/
 test_dynet.sh
 test_dynet.py
 bible_model_final_appended_combined_fr_de.log
+bible_model_final_combined_fr_de
+test/
+draw_train_loss/loss1.png
+draw_train_loss/loss2.png
