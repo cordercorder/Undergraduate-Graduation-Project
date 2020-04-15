@@ -81,7 +81,7 @@ END_TOKEN = '<e>'
 # define model and obtain vocabulary
 # (reload vocab files if saved model or create new vocab files if new model)
 
-model = dynet.Model()
+model = dynet.ParameterCollection()
 if not args.trainer or args.trainer=="simple_sgd":
     trainer = dynet.SimpleSGDTrainer(model)
 elif args.trainer == "momentum_sgd":

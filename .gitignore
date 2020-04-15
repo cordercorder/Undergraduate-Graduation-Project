@@ -11,3 +11,4 @@ bible_model_final/
 final_tests_fr_to_en/
 test_dynet.sh
 test_dynet.py
+bible_model_final_appended_combined_fr_de.log

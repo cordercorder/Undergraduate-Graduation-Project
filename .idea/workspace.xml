@@ -2,10 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ae2dd66e-565d-4824-b6e7-8ed7074dee0e" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/bible_model_final_appended_combined_fr_de.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/preprocessing/create_train_data.py" beforeDir="false" afterPath="$PROJECT_DIR$/preprocessing/create_train_data.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run_trainer.sh" beforeDir="false" afterPath="$PROJECT_DIR$/run_trainer.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sequence2sequence.py" beforeDir="false" afterPath="$PROJECT_DIR$/sequence2sequence.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trainer.py" beforeDir="false" afterPath="$PROJECT_DIR$/trainer.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -15,26 +17,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/trainer.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-3024">
-              <caret line="131" column="20" lean-forward="true" selection-start-line="131" selection-start-column="20" selection-end-line="131" selection-end-column="20" />
-              <folding>
-                <element signature="e#16#98#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/util.py">
+        <entry file="file://$PROJECT_DIR$/run_trainer.sh">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2234">
-              <caret line="171" column="18" lean-forward="true" selection-start-line="171" selection-start-column="18" selection-end-line="171" selection-end-column="18" />
-              <folding>
-                <element signature="e#16#70#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="287">
+              <caret line="16" column="28" selection-start-line="16" selection-start-column="28" selection-end-line="16" selection-end-column="28" />
             </state>
           </provider>
         </entry>
@@ -42,8 +29,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/sequence2sequence.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="279">
-              <caret line="72" column="25" selection-start-line="72" selection-start-column="24" selection-end-line="72" selection-end-column="25" />
+            <state relative-caret-position="137">
+              <caret line="323" column="16" lean-forward="true" selection-start-line="323" selection-start-column="16" selection-end-line="323" selection-end-column="16" />
               <folding>
                 <element signature="e#18#91#0" expanded="true" />
               </folding>
@@ -52,31 +39,39 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/run_trainer.sh">
+        <entry file="file://$PROJECT_DIR$/trainer.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="215">
-              <caret line="14" column="62" lean-forward="true" selection-start-line="14" selection-start-column="62" selection-end-line="14" selection-end-column="62" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/preprocessing/create_train_data.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="186">
-              <caret line="56" lean-forward="true" selection-start-line="56" selection-end-line="56" />
+            <state relative-caret-position="92">
+              <caret line="83" column="35" lean-forward="true" selection-start-line="83" selection-start-column="35" selection-end-line="83" selection-end-column="35" />
               <folding>
-                <element signature="e#0#15#0" expanded="true" />
+                <element signature="e#16#98#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test_dynet.sh">
+        <entry file="file://$PROJECT_DIR$/bible_model_final_appended_combined_fr_de.log">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="81">
-              <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
+            <state relative-caret-position="351">
+              <caret line="13" column="45" selection-start-line="13" selection-start-column="45" selection-end-line="13" selection-end-column="45" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/util.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="5616">
+              <caret line="216" column="8" selection-start-line="216" selection-start-column="8" selection-end-line="216" selection-end-column="8" />
+              <folding>
+                <element signature="e#16#70#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -102,7 +97,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/run.sh">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="366">
+            <state relative-caret-position="432">
               <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
             </state>
           </provider>
@@ -111,7 +106,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/runeval.sh">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="358">
+            <state relative-caret-position="459">
               <caret line="17" selection-start-line="17" selection-end-line="17" />
             </state>
           </provider>
@@ -128,16 +123,9 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>src_reader</find>
-      <find>prev_hyp_id</find>
-      <find>prev_hyp_ids</find>
-      <find>result</find>
-      <find>new_hyp_scores</find>
       <find>log_train_every_n</find>
       <find>find</find>
-      <find>save</find>
       <find>dynet</find>
-      <find>parse</find>
       <find>parse_</find>
       <find>reader_mode</find>
       <find>write_embeddings</find>
@@ -147,17 +135,24 @@
       <find>arg</find>
       <find>hidden_dim</find>
       <find>attention</find>
-      <find>translate</find>
       <find>model_type</find>
       <find>input</find>
       <find>min</find>
-      <find>load</find>
       <find>train_data_src</find>
       <find>get_batch_loss</find>
       <find>saving</find>
       <find>token</find>
       <find>add</find>
       <find>add_token</find>
+      <find>__init__</find>
+      <find>save</find>
+      <find>parse</find>
+      <find>args</find>
+      <find>result</find>
+      <find>results_filename</find>
+      <find>translate</find>
+      <find>load</find>
+      <find>model</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -166,7 +161,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/classify.py" />
         <option value="$PROJECT_DIR$/paired_bootstrap.py" />
         <option value="$PROJECT_DIR$/tok_bpe_sample.py" />
         <option value="$PROJECT_DIR$/preprocessing/create_dev_test_set.py" />
@@ -204,18 +198,20 @@
         <option value="$PROJECT_DIR$/OPUS_Corpus_Spider/Spider.py" />
         <option value="$PROJECT_DIR$/OPUS_Corpus_Spider/run_Spider.sh" />
         <option value="$PROJECT_DIR$/OPUS_Corpus_Spider/README.md" />
-        <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/preprocessing/delete_file.py" />
         <option value="$PROJECT_DIR$/preprocessing/clean_corpus.py" />
         <option value="$PROJECT_DIR$/run_small_trainer.sh" />
         <option value="$PROJECT_DIR$/preprocessing/bpe-apply.py" />
         <option value="$PROJECT_DIR$/test_dynet.py" />
         <option value="$PROJECT_DIR$/preprocessing/run_create_train_data.sh" />
-        <option value="$PROJECT_DIR$/sequence2sequence.py" />
         <option value="$PROJECT_DIR$/preprocessing/create_train_data.py" />
         <option value="$PROJECT_DIR$/test_dynet.sh" />
+        <option value="$PROJECT_DIR$/view_modles_parameters.py" />
+        <option value="$PROJECT_DIR$/view_models_parameters.py" />
         <option value="$PROJECT_DIR$/run_trainer.sh" />
+        <option value="$PROJECT_DIR$/sequence2sequence.py" />
         <option value="$PROJECT_DIR$/trainer.py" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -240,16 +236,6 @@
             <path>
               <item name="Graduation" type="b2602c69:ProjectViewProjectNode" />
               <item name="Graduation" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Graduation" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Graduation" type="462c0819:PsiDirectoryNode" />
-              <item name="data" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Graduation" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Graduation" type="462c0819:PsiDirectoryNode" />
-              <item name="preprocessing" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -521,7 +507,9 @@
       <workItem from="1586695537040" duration="15963000" />
       <workItem from="1586794594730" duration="5770000" />
       <workItem from="1586853059796" duration="9587000" />
-      <workItem from="1586866008676" duration="20185000" />
+      <workItem from="1586866008676" duration="20433000" />
+      <workItem from="1586921531547" duration="5006000" />
+      <workItem from="1586936280816" duration="395000" />
     </task>
     <servers />
   </component>
@@ -543,7 +531,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="323231000" />
+    <option name="totallyTimeSpent" value="328880000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -556,8 +544,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.09621212" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25984848" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -571,15 +560,15 @@
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.32838285" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50151515" side_tool="true" weight="0.38118812" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="11" sideWeight="0.49848485" visible="true" weight="0.23267327" />
+      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.49848485" visible="true" weight="0.25412542" />
       <window_info anchor="bottom" id="Python Console" order="12" weight="0.39768976" />
-      <window_info anchor="bottom" id="File Transfer" order="13" weight="0.45049506" />
+      <window_info anchor="bottom" id="File Transfer" order="13" weight="0.36138615" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="SciView" order="3" sideWeight="0.49834985" weight="0.32954547" />
       <window_info anchor="right" id="Database" order="4" />
-      <window_info anchor="right" id="Remote Host" order="5" sideWeight="0.50165015" side_tool="true" weight="0.20984848" />
+      <window_info anchor="right" id="Remote Host" order="5" sideWeight="0.50165015" side_tool="true" visible="true" weight="0.23409091" />
     </layout>
     <layout-to-restore>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.096969694" />
@@ -638,9 +627,6 @@
     <SUITE FILE_PATH="coverage/Graduation$create_small_train_data.coverage" NAME="create_small_train_data Coverage Results" MODIFIED="1585399634199" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/preprocessing" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/test/preprocess_bible_cordercorder.py" />
-    <entry file="file://$PROJECT_DIR$/test/__init__.py" />
-    <entry file="file://$PROJECT_DIR$/README.md" />
     <entry file="file://$PROJECT_DIR$/test/test_trainer.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="216">
@@ -721,13 +707,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/test_dyet.sh" />
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="324">
-          <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/.PyCharm2019.1/system/remote_sources/589758482/1194489707/nltk/translate/bleu_score.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3240">
@@ -925,17 +904,37 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/runeval.sh">
+    <entry file="file://$PROJECT_DIR$/preprocessing/create_train_data.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="358">
-          <caret line="17" selection-start-line="17" selection-end-line="17" />
+        <state relative-caret-position="1431">
+          <caret line="56" selection-start-line="56" selection-end-line="56" />
+          <folding>
+            <element signature="e#0#15#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/run.sh">
+    <entry file="file://$PROJECT_DIR$/test_dynet.sh">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="366">
-          <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
+        <state relative-caret-position="81">
+          <caret line="3" selection-start-line="3" selection-end-line="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/.PyCharm2019.1/system/remote_sources/914156129/-1022922850/dynet_viz.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="193">
+          <caret line="196" column="8" selection-start-line="196" selection-start-column="8" selection-end-line="196" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/util.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5616">
+          <caret line="216" column="8" selection-start-line="216" selection-start-column="8" selection-end-line="216" selection-end-column="8" />
+          <folding>
+            <element signature="e#16#70#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -953,57 +952,64 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test_dynet.sh">
+    <entry file="file://$PROJECT_DIR$/run.sh">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="81">
-          <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
+        <state relative-caret-position="432">
+          <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/preprocessing/create_train_data.py">
+    <entry file="file://$PROJECT_DIR$/runeval.sh">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="186">
-          <caret line="56" lean-forward="true" selection-start-line="56" selection-end-line="56" />
-          <folding>
-            <element signature="e#0#15#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/util.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2234">
-          <caret line="171" column="18" lean-forward="true" selection-start-line="171" selection-start-column="18" selection-end-line="171" selection-end-column="18" />
-          <folding>
-            <element signature="e#16#70#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/run_trainer.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="215">
-          <caret line="14" column="62" lean-forward="true" selection-start-line="14" selection-start-column="62" selection-end-line="14" selection-end-column="62" />
+        <state relative-caret-position="459">
+          <caret line="17" selection-start-line="17" selection-end-line="17" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/sequence2sequence.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="279">
-          <caret line="72" column="25" selection-start-line="72" selection-start-column="24" selection-end-line="72" selection-end-column="25" />
+        <state relative-caret-position="137">
+          <caret line="323" column="16" lean-forward="true" selection-start-line="323" selection-start-column="16" selection-end-line="323" selection-end-column="16" />
           <folding>
             <element signature="e#18#91#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/run_trainer.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="287">
+          <caret line="16" column="28" selection-start-line="16" selection-start-column="28" selection-end-line="16" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view_models_parameters.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="314">
+          <caret line="14" selection-start-line="14" selection-end-line="14" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/trainer.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3024">
-          <caret line="131" column="20" lean-forward="true" selection-start-line="131" selection-start-column="20" selection-end-line="131" selection-end-column="20" />
+        <state relative-caret-position="92">
+          <caret line="83" column="35" lean-forward="true" selection-start-line="83" selection-start-column="35" selection-end-line="83" selection-end-column="35" />
           <folding>
             <element signature="e#16#98#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bible_model_final_appended_combined_fr_de.log">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="351">
+          <caret line="13" column="45" selection-start-line="13" selection-start-column="45" selection-end-line="13" selection-end-column="45" />
         </state>
       </provider>
     </entry>

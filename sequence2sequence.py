@@ -65,9 +65,9 @@ class Seq2SeqBasic(Seq2SeqTemplate):
         if not os.path.exists(path): raise Exception("Model "+path+" does not exist")
         src_vocab = util.Vocab.load(path+"/vocab.src")
         tgt_vocab = util.Vocab.load(path+"/vocab.tgt")
-        with open(path+"/args", "r") as f: args = pickle.load(f)
+        with open(path+"/args", "rb") as f: args = pickle.load(f)
         s2s = cls(model, src_vocab, tgt_vocab, args)
-        s2s.m.load(path+"/params")
+        s2s.m.populate(path+"/params")
         return s2s
 
     def embed_seq(self, seq):
