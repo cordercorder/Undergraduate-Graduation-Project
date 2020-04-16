@@ -20,6 +20,8 @@ with open(args.train_log_file) as f:
             loss.append(float(line[l:r]))
 
 x = list(range(len(loss)))
+plt.xlabel("log_train_step")
+plt.ylabel("loss")
 plt.plot(x, loss, label=args.title)
 plt.title(args.title)
 plt.legend()

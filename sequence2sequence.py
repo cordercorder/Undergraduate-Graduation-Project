@@ -33,13 +33,13 @@ class Seq2SeqBasic(Seq2SeqTemplate):
 
         # Bidirectional Encoder LSTM
         print("Adding Forward encoder LSTM parameters")
-        self.enc_fwd_lstm = dynet.LSTMBuilder(args.layers, args.input_dim, args.hidden_dim, model)
+        self.enc_fwd_network = args.rnn(args.layers, args.input_dim, args.hidden_dim, model)
         print("Adding Backward encoder LSTM parameters")
-        self.enc_bwd_lstm = dynet.LSTMBuilder(args.layers, args.input_dim, args.hidden_dim, model)
+        self.enc_bwd_network = args.rnn(args.layers, args.input_dim, args.hidden_dim, model)
 
         #Decoder LSTM
         print("Adding decoder LSTM parameters")
-        self.dec_lstm = dynet.LSTMBuilder(args.layers, args.input_dim, args.hidden_dim, model)
+        self.dec_network = args.rnn(args.layers, args.input_dim, args.hidden_dim, model)
 
         #Decoder weight and bias
         print("Adding Decoder weight")
@@ -97,8 +97,8 @@ class Seq2SeqBasic(Seq2SeqTemplate):
         """
 
         src_seq_rev = list(reversed(src_seq))
-        fwd_vectors = self.enc_fwd_lstm.initial_state().transduce(src_seq)
-        bwd_vectors = self.enc_bwd_lstm.initial_state().transduce(src_seq_rev)
+        fwd_vectors = self.enc_fwd_network.initial_state().transduce(src_seq)
+        bwd_vectors = self.enc_bwd_network.initial_state().transduce(src_seq_rev)
         bwd_vectors = list(reversed(bwd_vectors))
         vectors = [dynet.concatenate(list(p)) for p in zip(fwd_vectors, bwd_vectors)]
         return vectors
@@ -110,8 +110,8 @@ class Seq2SeqBasic(Seq2SeqTemplate):
         :param src_seq_rev: batch of sentences in reversed order
         :return: last hidden state of the encoder
         """
-        fwd_vectors = self.enc_fwd_lstm.initial_state().transduce(src_seq)
-        bwd_vectors = list(reversed(self.enc_bwd_lstm.initial_state().transduce(src_seq_rev)))
+        fwd_vectors = self.enc_fwd_network.initial_state().transduce(src_seq)
+        bwd_vectors = list(reversed(self.enc_bwd_network.initial_state().transduce(src_seq_rev)))
         return dynet.concatenate([fwd_vectors[-1], bwd_vectors[-1]])
 
     def decode(self, encoding, input, output):
@@ -128,7 +128,7 @@ class Seq2SeqBasic(Seq2SeqTemplate):
 
         w = dynet.parameter(self.decoder_w)
         b = dynet.parameter(self.decoder_b)
-        s = self.dec_lstm.initial_state().add_input(encoding)
+        s = self.dec_network.initial_state().add_input(encoding)
         loss = []
 
         sent = []
@@ -154,7 +154,7 @@ class Seq2SeqBasic(Seq2SeqTemplate):
         """
         w = dynet.parameter(self.decoder_w)
         b = dynet.parameter(self.decoder_b)
-        s = self.dec_lstm.initial_state().add_input(encoding)
+        s = self.dec_network.initial_state().add_input(encoding)
         losses = []
 
         maxSentLength = max([len(sent) for sent in output_batch])
@@ -199,7 +199,7 @@ class Seq2SeqBasic(Seq2SeqTemplate):
         w = dynet.parameter(self.decoder_w)
         b = dynet.parameter(self.decoder_b)
 
-        s = self.dec_lstm.initial_state().add_input(encoding)
+        s = self.dec_network.initial_state().add_input(encoding)
 
         out = []
         for _ in range(5*len(src)):
@@ -221,7 +221,7 @@ class Seq2SeqBasic(Seq2SeqTemplate):
         w = dynet.parameter(self.decoder_w)
         b = dynet.parameter(self.decoder_b)
 
-        s = self.dec_lstm.initial_state()
+        s = self.dec_network.initial_state()
         s = s.add_input(input_vectors[-1])
         beams = [{"state":  s,
                   "out":    [],
@@ -330,18 +330,18 @@ class Seq2SeqBiRNNAttn(Seq2SeqBasic):
         self.args = args
         # Bidirectional Encoder LSTM
         print("Adding Forward encoder LSTM parameters")
-        self.enc_fwd_lstm = dynet.LSTMBuilder(args.layers, args.input_dim, args.hidden_dim, model)
+        self.enc_fwd_network = args.rnn(args.layers, args.input_dim, args.hidden_dim, model)
         print("Adding Backward encoder LSTM parameters")
-        self.enc_bwd_lstm = dynet.LSTMBuilder(args.layers, args.input_dim, args.hidden_dim, model)
+        self.enc_bwd_network = args.rnn(args.layers, args.input_dim, args.hidden_dim, model)
 
         #Decoder LSTM
         print("Adding decoder LSTM parameters")
-        self.dec_lstm = dynet.LSTMBuilder(args.layers, args.input_dim + args.hidden_dim*2, args.hidden_dim, model)
+        self.dec_network = args.rnn(args.layers, args.input_dim + args.hidden_dim*2, args.hidden_dim, model)
 
         if args.dropout > 0.:
-            self.enc_fwd_lstm.set_dropout(args.dropout)
-            self.enc_bwd_lstm.set_dropout(args.dropout)
-            self.dec_lstm.set_dropout(args.dropout)
+            self.enc_fwd_network.set_dropout(args.dropout)
+            self.enc_bwd_network.set_dropout(args.dropout)
+            self.dec_network.set_dropout(args.dropout)
 
         #Decoder weight and bias
         print("Adding Decoder weight")
@@ -376,8 +376,8 @@ class Seq2SeqBiRNNAttn(Seq2SeqBasic):
         return [dynet.lookup(self.src_lookup, wid) for wid in wids]
 
     def encode_seq(self, src_seq, src_seq_rev):
-        fwd_vectors = self.enc_fwd_lstm.initial_state().transduce(src_seq)
-        bwd_vectors = list(reversed(self.enc_fwd_lstm.initial_state().transduce(src_seq_rev)))
+        fwd_vectors = self.enc_fwd_network.initial_state().transduce(src_seq)
+        bwd_vectors = list(reversed(self.enc_fwd_network.initial_state().transduce(src_seq_rev)))
         return [dynet.concatenate(list(p)) for p in zip(fwd_vectors, bwd_vectors)]
 
     def embed_batch_seq(self, wids):
@@ -388,8 +388,8 @@ class Seq2SeqBiRNNAttn(Seq2SeqBasic):
 
     def encode_batch_seq(self, src_seq, src_seq_rev):
 
-        forward_states = self.enc_fwd_lstm.initial_state().add_inputs(src_seq)
-        backward_states = self.enc_bwd_lstm.initial_state().add_inputs(src_seq_rev)[::-1]
+        forward_states = self.enc_fwd_network.initial_state().add_inputs(src_seq)
+        backward_states = self.enc_bwd_network.initial_state().add_inputs(src_seq_rev)[::-1]
 
         src_encodings = []
         forward_cells = []
@@ -435,7 +435,7 @@ class Seq2SeqBiRNNAttn(Seq2SeqBasic):
         w = dynet.parameter(self.decoder_w)
         b = dynet.parameter(self.decoder_b)
 
-        s = self.dec_lstm.initial_state()
+        s = self.dec_network.initial_state()
         s = s.add_input(dynet.concatenate([
                                             input_vectors[-1],
                                             dynet.vecInput(self.args.hidden_dim)
@@ -473,8 +473,8 @@ class Seq2SeqBiRNNAttn(Seq2SeqBasic):
 
 
         decoder_init_cell = dynet.affine_transform([b_s, W_s, decoder_init])
-        s = self.dec_lstm.initial_state([decoder_init_cell, dynet.tanh(decoder_init_cell)])
-        # s = self.dec_lstm.initial_state.add_input([decoder_init_cell, dynet.tanh(decoder_init_cell)])
+        s = self.dec_network.initial_state([decoder_init_cell, dynet.tanh(decoder_init_cell)])
+        # s = self.dec_network.initial_state.add_input([decoder_init_cell, dynet.tanh(decoder_init_cell)])
         ctx_tm1 = dynet.vecInput(self.args.hidden_dim * 2)
         losses = []
 
@@ -538,15 +538,14 @@ class Seq2SeqBiRNNAttn(Seq2SeqBasic):
         encoded = self.encode_seq(embedded)
         return self.decode(encoded, output)
 
-
-    def translate(self, test_data, filename, val_idx, cell_idx=0, epoch=""):
-        if not os.path.exists("final_tests"):
-          os.makedirs("final_tests")
+    def translate(self, test_data, directory_name, filename, val_idx, cell_idx=0, epoch=""):
+        if not os.path.exists(directory_name):
+            os.makedirs(directory_name)
  
         translations = []
         references = []
         empty = True
-        f = open("final_tests/" + str(filename) + "_" + str(epoch) + "_" + str(val_idx) + ".txt", "a")
+        f = open(directory_name + "/" + str(filename) + "_" + str(epoch) + "_" + str(val_idx) + ".txt", "a")
         idx = 0
         dec_plot = []
         sents = []
@@ -583,13 +582,15 @@ class Seq2SeqBiRNNAttn(Seq2SeqBasic):
             #util.plot_trajectories(sent, np.asarray(dec_plot), idx)
             #util.plot_nodes(src, src_encodings, idx)
             idx += 1
-        util.plot_sent_trajectories(sents, dec_plot) 
+        util.plot_sent_trajectories(directory_name, sents, dec_plot)
         if empty:
             return 0.0, translations
         #mean = np.mean(last_encs, axis=0)
         #var = np.var(last_encs, axis=0)
-        if len(translations)==0: bleu_score=0.0
-        else: bleu_score = corpus_bleu(references, translations)
+        if len(translations) == 0:
+            bleu_score=0.0
+        else:
+            bleu_score = corpus_bleu(references, translations)
         f.write("BLEU SCORE:" + str(bleu_score) + "\n")
         f.close()
     #return mean, var
@@ -617,8 +618,8 @@ class Seq2SeqBiRNNAttn(Seq2SeqBasic):
 
         completed_hypotheses = []
         decoder_init_cell = dynet.affine_transform([b_s, W_s, decoder_init])
-        hypotheses = [Hypothesis(state=self.dec_lstm.initial_state([decoder_init_cell, dynet.tanh(decoder_init_cell)]),
-                                 #state=self.dec_lstm.initial_state.add_input([decoder_init_cell, dynet.tanh(decoder_init_cell)]),
+        hypotheses = [Hypothesis(state=self.dec_network.initial_state([decoder_init_cell, dynet.tanh(decoder_init_cell)]),
+                                 #state=self.dec_network.initial_state.add_input([decoder_init_cell, dynet.tanh(decoder_init_cell)]),
                                  y=[self.tgt_vocab['<s>'].i],
                                  ctx_tm1=dynet.vecInput(self.args.hidden_dim * 2),
                                  score=0., 

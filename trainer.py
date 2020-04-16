@@ -59,10 +59,11 @@ parser.add_argument("--log_output")
 parser.add_argument("--model_type", default="basic")
 parser.add_argument("--load")
 parser.add_argument("--save")
-parser.add_argument("--eval", action='store_true')
-parser.add_argument("--eval_all", action='store_true')
-parser.add_argument("--test", action='store_true')
-parser.add_argument("--results_filename", default='results')
+parser.add_argument("--eval", action="store_true")
+parser.add_argument("--eval_all", action="store_true")
+parser.add_argument("--test", action="store_true")
+parser.add_argument("--results_filename", default="results")
+parser.add_argument("--directory_name", default="final_tests")
 
 ## model-specific parameters
 parser.add_argument("--beam_size", default=3, type=int)
@@ -71,9 +72,12 @@ parser.add_argument("--minibatch_size", default=64, type=int)
 args, unknown = parser.parse_known_args()
 print("ARGS:", args)
 
-if args.rnn == "lstm": args.rnn = dynet.LSTMBuilder
-elif args.rnn == "gru": args.rnn = dynet.GRUBuilder
-else: args.rnn = dynet.SimpleRNNBuilder
+if args.rnn == "lstm":
+    args.rnn = dynet.LSTMBuilder
+elif args.rnn == "gru":
+    args.rnn = dynet.GRUBuilder
+else:
+    args.rnn = dynet.SimpleRNNBuilder
 
 BEGIN_TOKEN = '<s>'
 END_TOKEN = '<e>'
@@ -178,11 +182,12 @@ if args.eval:
     #random.shuffle(combined)
     #test_data_src[:], test_data_tgt[:] = zip(*combined)
     test_data = zip(test_data_src, test_data_tgt)
-    s2s.translate(test_data, args.results_filename, "final")
+    s2s.translate(test_data, args.directory_name, args.results_filename, "final")
     if args.test:
         s2s.evaluate(test_data)
         sys.exit("...done.")
-    else: raise Exception("Test file path argument missing")
+    else:
+        raise Exception("Test file path argument missing")
     sys.exit("...done.")
     if args.plot_embeddings:
         s2s.tsne_embeddings(test_data)
@@ -256,11 +261,11 @@ try:
                                       # str(v_cum_em   / v_sent_count) + "\t" + \
                                       # str(v_cum_bleu / v_sent_count) + "\n")
 
-                s2s.translate(zip(valid_data_src, valid_data_tgt), args.results_filename, sample_num, epoch=ITER)
+                s2s.translate(zip(valid_data_src, valid_data_tgt), args.directory_name, args.results_filename, sample_num, epoch=ITER)
 
                 if args.save:
-                  print("saving checkpoint...")
-                  s2s.save(args.save + ".checkpoint")
+                    print("saving checkpoint...")
+                    s2s.save(args.save + ".checkpoint")
             # end of validation logging
             loss = s2s.get_batch_loss(batched_src, batched_tgt)
             loss_value = loss.value()

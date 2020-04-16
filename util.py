@@ -72,7 +72,7 @@ def plot_trajectories(src_sent, src_encoding, idx):
     plt.close()
 
 
-def plot_sent_trajectories(sents, decode_plot):
+def plot_sent_trajectories(directory_name, sents, decode_plot):
    
     font = {'family': 'normal', 'size': 14}
 
@@ -95,7 +95,7 @@ def plot_sent_trajectories(sents, decode_plot):
     plt.xlabel('timestep')
     plt.ylabel('trajectories')
     plt.legend(loc='best')
-    plt.savefig("final_tests/cr_por_cat_hidden_cell_trajectories", bbox_inches="tight")
+    plt.savefig(directory_name + "/" + "cr_por_cat_hidden_cell_trajectories", bbox_inches="tight")
     plt.close()
 
 def itersubclasses(cls, _seen=None):
