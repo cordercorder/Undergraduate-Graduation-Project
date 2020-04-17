@@ -14,6 +14,7 @@ bible_model_final_appended_combined_fr_de_lstm.log
 bible_model_final_combined_fr_de_lstm
 bible_model_final_combined_fr_de_lstm.checkpoint
 test/
-draw_train_loss/loss1.png
-draw_train_loss/loss2.png
-draw_train_loss/loss3.png
+draw_train_loss/combine_fr_de_lstm_loss1.png
+draw_train_loss/combine_fr_de_lstm_loss2.png
+draw_train_loss/combine_fr_de_lstm_loss3.png
+draw_train_loss/combine_fr_de_lstm_loss4.png
