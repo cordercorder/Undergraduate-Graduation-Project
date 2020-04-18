@@ -5,6 +5,7 @@ parser = argparse.ArgumentParser()
 
 parser.add_argument("--train_log_file", required=True)
 parser.add_argument("--output_file_name", required=True)
+parser.add_argument("--color")
 parser.add_argument("--title")
 
 args, unknown = parser.parse_known_args()
@@ -22,7 +23,10 @@ with open(args.train_log_file) as f:
 x = list(range(len(loss)))
 plt.xlabel("log_train_step")
 plt.ylabel("loss")
-plt.plot(x, loss, label=args.title)
+if args.color:
+    plt.plot(x, loss, label=args.title, color=args.color)
+else:
+    plt.plot(x, loss, label=args.title)
 plt.title(args.title)
 plt.legend()
 plt.grid()

@@ -8,8 +8,6 @@ runeval.sh
 bible_model_final.checkpoint/
 bible_model_final/
 final_tests_combine_fr_de_lstm/
-test_dynet.sh
-test_dynet.py
 bible_model_final_appended_combined_fr_de_lstm.log
 bible_model_final_combined_fr_de_lstm
 bible_model_final_combined_fr_de_lstm.checkpoint
@@ -18,3 +16,11 @@ draw_train_loss/combine_fr_de_lstm_loss1.png
 draw_train_loss/combine_fr_de_lstm_loss2.png
 draw_train_loss/combine_fr_de_lstm_loss3.png
 draw_train_loss/combine_fr_de_lstm_loss4.png
+draw_train_loss/fr_log_lstm_loss1.png
+draw_train_loss/fr_log_lstm_loss2.png
+draw_train_loss/fr_log_lstm_loss3.png
+draw_train_loss/fr_log_lstm_loss4.png
+draw_train_loss/de_log_lstm_loss1.png
+draw_train_loss/de_log_lstm_loss2.png
+draw_train_loss/de_log_lstm_loss3.png
+draw_train_loss/de_log_lstm_loss4.png

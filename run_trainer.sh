@@ -1,4 +1,4 @@
-# nohup sh run_trainer.sh >./train_logs/repeat_3_combined_fr_de_log_lstm.txt 2>&1 &
+# nohup sh run_trainer.sh >./train_logs/repeat_3_de_log_lstm.txt 2>&1 &
 python -u trainer.py \
     --dynet-mem 3500 \
     --dynet-gpu \
@@ -6,13 +6,13 @@ python -u trainer.py \
     --hidden_dim 350 \
     --model_type attention \
     --minibatch_size 32 \
-    --percent_valid 1000 \
+    --percent_valid 500 \
     --reader_mode parallel \
-    --train_src /data/rrjin/Graduation/data/bible-corpus/train_data/combine_fr_de_src.txt \
-    --train_tgt /data/rrjin/Graduation/data/bible-corpus/train_data/combine_fr_de_tgt.txt \
+    --train_src /data/rrjin/Graduation/data/bible-corpus/train_data/de_src.txt \
+    --train_tgt /data/rrjin/Graduation/data/bible-corpus/train_data/de_tgt.txt \
     --trainer adam \
-    --load bible_model_final_combined_fr_de_lstm \
-    --save bible_model_final_combined_fr_de_lstm \
-    --log_output bible_model_final_appended_combined_fr_de_lstm.log \
+    --save bible_model_final_de_lstm \
+    --load bible_model_final_de_lstm \
+    --log_output bible_model_final_appended_de_lstm.log \
     --results_filename repeat_3_result \
-    --directory_name final_tests_combine_fr_de_lstm
+    --directory_name final_tests_de_lstm
