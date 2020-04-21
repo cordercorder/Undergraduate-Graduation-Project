@@ -686,3 +686,13 @@ class Seq2SeqBiRNNAttn(Seq2SeqBasic):
 
         return sorted(completed_hypotheses, key=lambda x: x.score, reverse=True), src_encodings
 
+    def write_embeddings(self, word_list, lvs_directory, prefix_name):
+        wids = [self.src_vocab[word].i for word in word_list]
+        embedding = self.embed_seq(wids)
+
+        if not os.path.isdir(lvs_directory):
+            os.makedirs(lvs_directory)
+
+        for i, item in enumerate(embedding):
+
+            np.save(os.path.join(lvs_directory, prefix_name + word_list[i]), item.npvalue())

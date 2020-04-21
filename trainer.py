@@ -44,8 +44,9 @@ parser.add_argument("--trainer", default="adam")  # from (simple_sgd, momentum_s
 ## word embedding specific parameters
 # loss function to be used among/or combination of: phonological/morphological, bilingual, regularization, external knowledge
 parser.add_argument("--loss_function", default="cross_entropy")
-parser.add_argument("--write_embeddings", action='store_true') # Write embeddings to file
 parser.add_argument("--extract_lvs", type=str)
+parser.add_argument("--prefix_name")
+parser.add_argument("--word_list", nargs="+")
 
 ## experiment parameters
 parser.add_argument("--epochs", default=10, type=int)
@@ -158,7 +159,7 @@ else:
 
 if args.extract_lvs:
     print("Writing language vectors...")
-    embeddings.write_embeddings(s2s.src_lookup, src_vocab, args.extract_lvs)
+    s2s.write_embeddings(args.word_list, args.extract_lvs, args.prefix_name)
     sys.exit("...done.")
 
 # create log file for training

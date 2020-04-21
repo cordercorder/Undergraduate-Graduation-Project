@@ -6,7 +6,7 @@ source_dir = "/data/rrjin/Graduation/data/wals_features"
 
 data_all = collections.defaultdict(list)
 
-feature_id={"383":"SOV", "384":"SVO", "385":"VSO", "386":"VOS", "387":"OVS", "388":"OSV", "389":"None"}
+feature_id = {"383": "SOV", "384": "SVO", "385": "VSO", "386": "VOS", "387": "OVS", "388": "OSV", "389": "None"}
 
 for item in os.listdir(source_dir):
     if item.startswith("result"):

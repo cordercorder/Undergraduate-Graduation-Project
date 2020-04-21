@@ -1,0 +1,14 @@
+python -u trainer.py \
+    --dynet-mem 3500 \
+    --dynet-gpu \
+    --input_dim 350 \
+    --hidden_dim 350 \
+    --model_type attention \
+    --reader_mode parallel \
+    --train_src /data/rrjin/Graduation/data/bible-corpus/train_data/fr_src.txt \
+    --train_tgt /data/rrjin/Graduation/data/bible-corpus/train_data/fr_tgt.txt \
+    --trainer adam \
+    --load /data/rrjin/Graduation/bible_model_final_fr_lstm \
+    --extract_lvs /data/rrjin/Graduation/data/language_vector \
+    --word_list fr \
+    --prefix_name fr__
