@@ -28,7 +28,7 @@ for i, source in enumerate(args.source_directory):
 
         sentence_list = []
         for sentence in data:
-            tmp = re.sub(r"[,.?;'\"`~:!]", " ", sentence)
+            tmp = re.sub(r"[,.?;'\"`~:!。，？、．]", " ", sentence)
             if len(tmp) == 0:
                 continue
             if idx:
