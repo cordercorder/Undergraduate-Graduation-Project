@@ -5,12 +5,10 @@ train_logs/
 util-scripts/
 run.sh
 runeval.sh
-bible_model_final.checkpoint/
-bible_model_final/
-final_tests_combine_fr_de_lstm/
-bible_model_final_appended_combined_fr_de_lstm.log
-bible_model_final_combined_fr_de_lstm
-bible_model_final_combined_fr_de_lstm.checkpoint
+bible_model_final*.checkpoint/
+bible_model_final*/
+bible_model_final*
+final_tests_*/
 test/
 draw_train_loss/*.png
 baseline_data_all.png
