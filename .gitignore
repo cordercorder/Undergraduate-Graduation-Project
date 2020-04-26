@@ -10,9 +10,7 @@ bible_model_final*/
 bible_model_final*
 final_tests_*/
 test/
-draw_train_loss/*.png
-baseline_data_all.png
+*.png
 final_tests_de_lstm/
 final_tests_fr_lstm/
-draw_bleu_score/*.png
 draw_bleu_score/*.txt
