@@ -14,3 +14,4 @@ test/
 final_tests_de_lstm/
 final_tests_fr_lstm/
 draw_bleu_score/*.txt
+bible_langs.txt
