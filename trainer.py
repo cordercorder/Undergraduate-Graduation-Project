@@ -231,43 +231,48 @@ try:
                 # sample = s2s.generate(src, sampled=False)
                 word_count = sent_count = cum_loss = 0.0
                 log_start = time.time()
-                print("")
-            # end of test logging
-
-            if sample_num % (int(args.log_valid_every_n/args.minibatch_size)) == 0:
-                v_word_count = v_sent_count = v_cum_loss = v_cum_bleu = v_cum_em = 0.0
-                v_start = time.time()
-                for vid in valid_order:
-                    batched_v_src = valid_data_src[vid : vid + args.minibatch_size]
-                    batched_v_tgt = valid_data_tgt[vid : vid + args.minibatch_size]
-                    v_loss = s2s.get_batch_loss(batched_v_src, batched_v_tgt)
-                    v_cum_loss += v_loss.scalar_value()
-                    # v_cum_em += s2s.get_em(batched_v_src, batched_v_tgt)
-                    # v_cum_bleu += s2s.get_bleu(v_src, v_tgt, args.beam_size)
-                    v_word_count += sum([(len(tgt_sent) - 1) for tgt_sent in batched_v_tgt])
-                    v_sent_count += args.minibatch_size
-                print("[Validation Set", str(sample_num) + "]\t" + \
-                      "Loss:", str(v_cum_loss / v_word_count) + "\t" + \
-                      "Perplexity:", str(np.exp(v_cum_loss / v_word_count)) + "\t" + \
-                      # "BLEU: "+str(v_cum_bleu / v_sent_count) + "\t" + \
-                      # "EM: "  +str(v_cum_em   / v_sent_count) + "\t" + \
-                      "Time elapsed:", str(time.time() - v_start))
-                if args.log_output:
-                    print("(logging to", args.log_output + ")")
-                    with open(args.log_output, "a") as outfile:
-                        outfile.write(str(ITER) + "\t" + \
-                                      str(sample_num) + "\t" + \
-                                      str(v_cum_loss / v_word_count) + "\t" + \
-                                      str(np.exp(v_cum_loss / v_word_count)) + "\n")
-                                      # str(v_cum_em   / v_sent_count) + "\t" + \
-                                      # str(v_cum_bleu / v_sent_count) + "\n")
-
-                s2s.translate(zip(valid_data_src, valid_data_tgt), args.directory_name, args.results_filename, sample_num, epoch=ITER)
 
                 if args.save:
                     print("saving checkpoint...")
                     s2s.save(args.save + ".checkpoint")
+                print("")
+            # end of test logging
+
+            # if sample_num % (int(args.log_valid_every_n/args.minibatch_size)) == 0:
+            #     v_word_count = v_sent_count = v_cum_loss = v_cum_bleu = v_cum_em = 0.0
+            #     v_start = time.time()
+            #     for vid in valid_order:
+            #         batched_v_src = valid_data_src[vid : vid + args.minibatch_size]
+            #         batched_v_tgt = valid_data_tgt[vid : vid + args.minibatch_size]
+            #         v_loss = s2s.get_batch_loss(batched_v_src, batched_v_tgt)
+            #         v_cum_loss += v_loss.scalar_value()
+            #         # v_cum_em += s2s.get_em(batched_v_src, batched_v_tgt)
+            #         # v_cum_bleu += s2s.get_bleu(v_src, v_tgt, args.beam_size)
+            #         v_word_count += sum([(len(tgt_sent) - 1) for tgt_sent in batched_v_tgt])
+            #         v_sent_count += args.minibatch_size
+            #     print("[Validation Set", str(sample_num) + "]\t" + \
+            #           "Loss:", str(v_cum_loss / v_word_count) + "\t" + \
+            #           "Perplexity:", str(np.exp(v_cum_loss / v_word_count)) + "\t" + \
+            #           # "BLEU: "+str(v_cum_bleu / v_sent_count) + "\t" + \
+            #           # "EM: "  +str(v_cum_em   / v_sent_count) + "\t" + \
+            #           "Time elapsed:", str(time.time() - v_start))
+            #     if args.log_output:
+            #         print("(logging to", args.log_output + ")")
+            #         with open(args.log_output, "a") as outfile:
+            #             outfile.write(str(ITER) + "\t" + \
+            #                           str(sample_num) + "\t" + \
+            #                           str(v_cum_loss / v_word_count) + "\t" + \
+            #                           str(np.exp(v_cum_loss / v_word_count)) + "\n")
+            #                           # str(v_cum_em   / v_sent_count) + "\t" + \
+            #                           # str(v_cum_bleu / v_sent_count) + "\n")
+            #
+            #     s2s.translate(zip(valid_data_src, valid_data_tgt), args.directory_name, args.results_filename, sample_num, epoch=ITER)
+            #
+            #     if args.save:
+            #         print("saving checkpoint...")
+            #         s2s.save(args.save + ".checkpoint")
             # end of validation logging
+
             loss = s2s.get_batch_loss(batched_src, batched_tgt)
             loss_value = loss.value()
             cum_loss += loss_value * args.minibatch_size
