@@ -6,6 +6,7 @@ import lang2vec.lang2vec as l2v
 from sklearn import preprocessing, neighbors, linear_model, multioutput
 
 source_dir = "/data/rrjin/Graduation/data/bible-corpus/parallel_text"
+
 parser = argparse.ArgumentParser()
 parser.add_argument("--feature_name", required=True)
 parser.add_argument("--output_file_name", required=True)
@@ -27,16 +28,16 @@ def get_language_alpha3(language_code):
 
 
 def check_alpha3(alpha3):
-    if alpha3 != "unkown language" and alpha3 in l2v.LANGUAGES:
+    if alpha3 != "unknown language" and alpha3 in l2v.LANGUAGES:
         return True
     return False
 
 
 langcode_to_alpha3 = {"jap": "jpn"}
 
-for data_set in os.listdir(source_dir):
+for lang in os.listdir(source_dir):
     # Get ISO 639-3 codes according to abbreviations of languages
-    s = data_set[:-4]
+    s = lang[:-4]
     language1, language2 = s.split("-")
     language1_alpha3, language2_alpha3 = get_language_alpha3(language1), get_language_alpha3(language2)
     if check_alpha3(language1_alpha3):
@@ -44,12 +45,15 @@ for data_set in os.listdir(source_dir):
     if check_alpha3(language2_alpha3):
         langcode_to_alpha3[language2] = language2_alpha3
 
+langcode_to_alpha3.pop("en")
 
 lang_alpha3 = list(langcode_to_alpha3.values())
 feature_name = args.feature_name
 features = l2v.get_features(lang_alpha3, feature_name, header=True)
 
 features_geo = l2v.get_features(lang_alpha3, "geo", header=True)
+
+lang_alpha3.sort()  # fix order
 
 X = [features_geo[lang] for lang in lang_alpha3]
 train_data_rate = 0.7
@@ -81,3 +85,5 @@ for feat in range(len(features["CODE"])):
 
     print("Feature {} accuracy is {}".format(features["CODE"][feat], score))
     f.write("Feature {} accuracy is {}\n".format(features["CODE"][feat], score))
+
+f.close()
