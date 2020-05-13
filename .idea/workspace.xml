@@ -2,14 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ae2dd66e-565d-4824-b6e7-8ed7074dee0e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/classify/run_geo_logistic_classify.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/deployment.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/deployment.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classify/geo_classify.py" beforeDir="false" afterPath="$PROJECT_DIR$/classify/geo_logistic_classify.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classify/lang_vec_classify.py" beforeDir="false" afterPath="$PROJECT_DIR$/classify/langvec_logistic_classify.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classify/run_geo_classify.sh" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/config.txt" beforeDir="false" afterPath="$PROJECT_DIR$/config.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/reduce_dim/reduce_dim.py" beforeDir="false" afterPath="$PROJECT_DIR$/reduce_dim/reduce_dim2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run_extract_lvs.sh" beforeDir="false" afterPath="$PROJECT_DIR$/run_extract_lvs.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classify/geo_logistic_classify.py" beforeDir="false" afterPath="$PROJECT_DIR$/classify/geo_logistic_classify.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classify/langvec_logistic_classify.py" beforeDir="false" afterPath="$PROJECT_DIR$/classify/langvec_logistic_classify.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classify/run_geo_logistic_classify.sh" beforeDir="false" afterPath="$PROJECT_DIR$/classify/run_geo_logistic_classify.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classify/run_langvec_logistic_classify.sh" beforeDir="false" afterPath="$PROJECT_DIR$/classify/run_langvec_logistic_classify.sh" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -20,25 +18,22 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/classify/geo_logistic_classify.py">
+        <entry file="file://$PROJECT_DIR$/classify/langvec_logistic_classify.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="81">
-              <caret line="56" lean-forward="true" selection-start-line="56" selection-end-line="56" />
+            <state relative-caret-position="135">
+              <caret line="93" lean-forward="true" selection-start-line="93" selection-end-line="93" />
               <folding>
-                <element signature="e#0#16#0" expanded="true" />
+                <element signature="e#0#9#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/classify/langvec_logistic_classify.py">
+        <entry file="file://$PROJECT_DIR$/classify/run_langvec_logistic_classify.sh">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="324">
-              <caret line="69" lean-forward="true" selection-start-line="69" selection-end-line="69" />
-              <folding>
-                <element signature="e#0#9#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="27">
+              <caret line="1" column="41" lean-forward="true" selection-start-line="1" selection-start-column="41" selection-end-line="1" selection-end-column="41" />
             </state>
           </provider>
         </entry>
@@ -148,10 +143,10 @@
         <option value="$PROJECT_DIR$/reduce_dim/reduce_dim2.py" />
         <option value="$PROJECT_DIR$/reduce_dim/reduce_dim3.py" />
         <option value="$PROJECT_DIR$/classify/run_geo_classify.sh" />
-        <option value="$PROJECT_DIR$/classify/run_langvec_logistic_classify.sh" />
-        <option value="$PROJECT_DIR$/classify/run_geo_logistic_classify.sh" />
-        <option value="$PROJECT_DIR$/classify/geo_logistic_classify.py" />
         <option value="$PROJECT_DIR$/classify/langvec_logistic_classify.py" />
+        <option value="$PROJECT_DIR$/classify/geo_logistic_classify.py" />
+        <option value="$PROJECT_DIR$/classify/run_geo_logistic_classify.sh" />
+        <option value="$PROJECT_DIR$/classify/run_langvec_logistic_classify.sh" />
       </list>
     </option>
   </component>
@@ -170,6 +165,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -186,7 +182,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -197,7 +192,7 @@
     <property name="WebServerToolWindowPanel.toolwindow.show.date" value="false" />
     <property name="WebServerToolWindowPanel.toolwindow.show.permissions" value="false" />
     <property name="WebServerToolWindowPanel.toolwindow.show.size" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/reduce_dim" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Graduation_test" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
@@ -500,7 +495,10 @@
       <workItem from="1588960166253" duration="241000" />
       <workItem from="1588960448732" duration="2678000" />
       <workItem from="1589120839668" duration="834000" />
-      <workItem from="1589121719025" duration="13280000" />
+      <workItem from="1589121719025" duration="13611000" />
+      <workItem from="1589199460945" duration="5335000" />
+      <workItem from="1589216792052" duration="2061000" />
+      <workItem from="1589342370048" duration="1222000" />
     </task>
     <servers />
   </component>
@@ -522,7 +520,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="606541000" />
+    <option name="totallyTimeSpent" value="615490000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -537,7 +535,7 @@
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2159091" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16818182" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -551,15 +549,15 @@
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.32838285" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50151515" side_tool="true" weight="0.38118812" />
-      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.49848485" weight="0.64356434" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" sideWeight="0.49848485" visible="true" weight="0.31848186" />
       <window_info anchor="bottom" id="Python Console" order="12" weight="0.39768976" />
-      <window_info anchor="bottom" id="File Transfer" order="13" weight="0.16666667" />
+      <window_info anchor="bottom" id="File Transfer" order="13" weight="0.18316832" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="SciView" order="3" sideWeight="0.49834985" weight="0.32954547" />
       <window_info anchor="right" id="Database" order="4" />
-      <window_info anchor="right" id="Remote Host" order="5" sideWeight="0.50165015" side_tool="true" visible="true" weight="0.1969697" />
+      <window_info anchor="right" id="Remote Host" order="5" sideWeight="0.50165015" side_tool="true" weight="0.26287878" />
     </layout>
     <layout-to-restore>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.09772728" />
@@ -618,31 +616,6 @@
     <SUITE FILE_PATH="coverage/Graduation$create_small_train_data.coverage" NAME="create_small_train_data Coverage Results" MODIFIED="1585399634199" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/preprocessing" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$USER_HOME$/.PyCharm2019.1/system/remote_sources/914156129/1895112762/typing.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="1544" lean-forward="true" selection-start-line="1544" selection-end-line="1544" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lang2vec.py" />
-    <entry file="file://$USER_HOME$/.PyCharm2019.1/system/remote_sources/914156129/-1022922850/numpy/core/fromnumeric.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="63018">
-          <caret line="2348" selection-start-line="2348" selection-end-line="2348" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/test_lang2vec.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="9" selection-start-line="9" selection-end-line="9" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/.PyCharm2019.1/system/remote_sources/914156129/-1022922850/sklearn/linear_model/_logistic.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="173">
@@ -918,57 +891,79 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/classify/langvec_logistic_classify_phonology_ethnologue.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-324" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/classify/langvec_logistic_classify_syntax_ethnologue.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2412" />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/classify/geo_logistic_classify_syntax_wals.txt">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/classify/langvec_logistic_classify_syntax_wals.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1512">
-          <caret line="56" column="54" lean-forward="true" selection-start-line="56" selection-start-column="54" selection-end-line="56" selection-end-column="54" />
+        <state relative-caret-position="-324">
+          <caret line="6" column="38" selection-start-line="6" selection-start-column="38" selection-end-line="6" selection-end-column="38" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/classify/langvec_logistic_classify_phonology_wals.txt">
-      <provider selected="true" editor-type-id="text-editor" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-324" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/classify/geo_logistic_classify_syntax_ethnologue.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="351">
+          <caret line="101" column="73" selection-start-line="101" selection-start-column="73" selection-end-line="101" selection-end-column="73" />
+        </state>
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/classify/geo_logistic_classify_phonology_wals.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="729">
-          <caret line="27" column="41" lean-forward="true" selection-start-line="27" selection-start-column="41" selection-end-line="27" selection-end-column="41" />
+        <state relative-caret-position="513">
+          <caret line="28" selection-start-line="28" selection-end-line="28" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/classify/run_geo_logistic_classify.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="54">
-          <caret line="2" column="60" lean-forward="true" selection-start-line="2" selection-start-column="60" selection-end-line="2" selection-end-column="60" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/classify/run_langvec_logistic_classify.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="27">
-          <caret line="1" column="32" lean-forward="true" selection-start-line="1" selection-start-column="32" selection-end-line="1" selection-end-column="32" />
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/classify/geo_logistic_classify_phonology_ethnologue.txt">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/classify/geo_logistic_classify.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="81">
-          <caret line="56" lean-forward="true" selection-start-line="56" selection-end-line="56" />
+        <state relative-caret-position="216">
+          <caret line="81" lean-forward="true" selection-start-line="81" selection-end-line="81" />
           <folding>
             <element signature="e#0#16#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/classify/run_geo_logistic_classify.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="54">
+          <caret line="2" column="51" selection-start-line="2" selection-start-column="51" selection-end-line="2" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/classify/langvec_logistic_classify.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="324">
-          <caret line="69" lean-forward="true" selection-start-line="69" selection-end-line="69" />
+        <state relative-caret-position="135">
+          <caret line="93" lean-forward="true" selection-start-line="93" selection-end-line="93" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/classify/run_langvec_logistic_classify.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="27">
+          <caret line="1" column="41" lean-forward="true" selection-start-line="1" selection-start-column="41" selection-end-line="1" selection-end-column="41" />
         </state>
       </provider>
     </entry>

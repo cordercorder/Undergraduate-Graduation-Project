@@ -58,32 +58,51 @@ lang_alpha3.sort()  # fix order
 X = [features_geo[lang] for lang in lang_alpha3]
 train_data_rate = 0.7
 
-X_train = X[:int(len(X)*train_data_rate)]
-X_test = X[int(len(X)*train_data_rate):]
-
 score_dict = {}
 
 f = open(os.path.join(os.getcwd(), args.output_file_name), "w")
 
 for feat in range(len(features["CODE"])):
     Y = [features[lang][feat] if features[lang][feat] != "--" else -1 for lang in lang_alpha3]
+
+    idx = [i for i in range(len(Y)) if Y[i] != -1]
+
+    train_set = np.array([(X[i], Y[i]) for i in idx])
+
+    if len(train_set) == 0:
+        print("Feature {} is not available in all 101 languages!".format(features["CODE"][feat]))
+        f.write("Feature {} is not available in all 101 languages!\n".format(features["CODE"][feat]))
+        continue
+
     lab_enc = preprocessing.LabelEncoder()
-    Y = lab_enc.fit_transform(Y)
+    train_set[:, 1] = lab_enc.fit_transform(train_set[:, 1])
 
-    Y_train = Y[:int(len(X) * train_data_rate)]
-    Y_test = Y[int(len(X) * train_data_rate):]
+    X_train = train_set[:int(len(train_set) * train_data_rate), 0]
+    Y_train = train_set[:int(len(train_set) * train_data_rate), 1]
 
-    if np.all(np.array(Y_train) == Y_train[0]):
+    X_test = train_set[int(len(train_set) * train_data_rate):, 0]
+    Y_test = train_set[int(len(train_set) * train_data_rate):, 1]
+
+    if len(X_train) == 0:
+        print("Feature {} has no train data!".format(features["CODE"][feat]))
+        f.write("Feature {} has no train data!\n".format(features["CODE"][feat]))
+        continue
+
+    if len(X_test) == 0:
+        print("Feature {} has no test data!".format(features["CODE"][feat]))
+        f.write("Feature {} has no test data!\n".format(features["CODE"][feat]))
+        continue
+
+    if np.all(Y_train == Y_train[0]):
         print("Feature {} has only one class!".format(features["CODE"][feat]))
         f.write("Feature {} has only one class!\n".format(features["CODE"][feat]))
         continue
 
     logistic_model = linear_model.LogisticRegression(max_iter=3000)
-    clf = logistic_model.fit(X_train, Y_train)
-    score = clf.score(X_test, Y_test)
+    clf = logistic_model.fit(X_train.tolist(), Y_train.tolist())
+    score = clf.score(X_test.tolist(), Y_test.tolist())
     score_dict[features["CODE"][feat]] = score
-
-    print("Feature {} accuracy is {}".format(features["CODE"][feat], score))
-    f.write("Feature {} accuracy is {}\n".format(features["CODE"][feat], score))
+    print("Feature {} accuracy is {}, train dataset has {} element, test dataset has {} element".format(features["CODE"][feat], score, len(X_train), len(X_test)))
+    f.write("Feature {} accuracy is {}, train dataset has {} element, test dataset has {} element\n".format(features["CODE"][feat], score, len(X_train), len(X_test)))
 
 f.close()
