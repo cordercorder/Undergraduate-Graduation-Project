@@ -61,8 +61,6 @@ parser.add_argument("--model_type", default="basic")
 parser.add_argument("--load")
 parser.add_argument("--save")
 parser.add_argument("--eval", action="store_true")
-parser.add_argument("--eval_all", action="store_true")
-parser.add_argument("--test", action="store_true")
 parser.add_argument("--results_filename", default="results")
 parser.add_argument("--directory_name", default="final_tests")
 
@@ -168,31 +166,18 @@ if args.log_output:
     outfile.write("")
     outfile.close()
 
-if args.eval_all:
-    print("Evaluating for all languages..")
-    s2s.all_langs_translate()
-
 # only evaluate existing model on test data
 if args.eval:
     print("Evaluating model...")
     test_data_src = list(util.get_reader(args.reader_mode)(args.test_src, mode=args.reader_mode, begin=BEGIN_TOKEN, end=END_TOKEN))
     test_data_tgt = list(util.get_reader(args.reader_mode)(args.test_tgt, mode=args.reader_mode, begin=BEGIN_TOKEN, end=END_TOKEN))
 
-
     #combined = list(zip(test_data_src, test_data_tgt))
     #random.shuffle(combined)
     #test_data_src[:], test_data_tgt[:] = zip(*combined)
     test_data = zip(test_data_src, test_data_tgt)
     s2s.translate(test_data, args.directory_name, args.results_filename, "final")
-    if args.test:
-        s2s.evaluate(test_data)
-        sys.exit("...done.")
-    else:
-        raise Exception("Test file path argument missing")
     sys.exit("...done.")
-    if args.plot_embeddings:
-        s2s.tsne_embeddings(test_data)
-        sys.exit("...done.")
 
 # Shuffle training data for bible model
 #combined = list(zip(train_data_src, train_data_tgt))
@@ -204,8 +189,8 @@ if args.minibatch_size != 0:
     train_order = [x*args.minibatch_size for x in range(len(train_data_src)//args.minibatch_size + (1 if len(train_data_src) % args.minibatch_size != 0 else 0))]
     valid_order = [x*args.minibatch_size for x in range(len(valid_data_src)//args.minibatch_size + (1 if len(valid_data_src) % args.minibatch_size != 0 else 0))]
 else:
-    train_order = range(len(train_data))
-    valid_order = range(len(valid_data))
+    train_order = range(len(train_data_src))
+    valid_order = range(len(valid_data_src))
 
 # run training loop
 word_count = sent_count = cum_loss = 0.0

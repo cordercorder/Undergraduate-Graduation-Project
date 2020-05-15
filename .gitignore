@@ -4,7 +4,6 @@ lang_vecs/
 train_logs/
 util-scripts/
 run.sh
-runeval.sh
 bible_model_final*.checkpoint/
 bible_model_final*/
 bible_model_final*
@@ -16,3 +15,4 @@ final_tests_fr_lstm/
 draw_bleu_score/*.txt
 bible_langs.txt
 classify/*.txt
+eval_jap_zh/

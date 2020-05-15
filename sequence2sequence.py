@@ -6,8 +6,7 @@ import random, math, os, util
 import numpy as np
 import pickle
 import sys
-
-
+import pycountry
 
 
 class Seq2SeqTemplate(object):
@@ -161,8 +160,8 @@ class Seq2SeqBasic(Seq2SeqTemplate):
         wids = []
         masks = []
         for j in range(maxSentLength):
-            wids.append([(self.tgt_vocab[sent[j]].i if len(sent)>j else self.tgt_vocab.END_TOK.i) for sent in output_batch])
-            mask = [(1 if len(sent)>j else 0) for sent in output_batch]
+            wids.append([(self.tgt_vocab[sent[j]].i if len(sent) > j else self.tgt_vocab.END_TOK.i) for sent in output_batch])
+            mask = [(1 if len(sent) > j else 0) for sent in output_batch]
             masks.append(mask)
 
         for wid, mask in zip(wids, masks):
@@ -277,8 +276,8 @@ class Seq2SeqBasic(Seq2SeqTemplate):
         # tot_words = 0
         maxSentLength = max([len(sent) for sent in input_batch])
         for j in range(maxSentLength):
-            wids.append([(self.src_vocab[sent[j]].i if len(sent)>j else self.src_vocab.END_TOK.i) for sent in input_batch])
-            wids_reversed.append([(self.src_vocab[sent[len(sent)- j-1]].i if len(sent)>j else self.src_vocab.END_TOK.i) for sent in input_batch])
+            wids.append([(self.src_vocab[sent[j]].i if len(sent) > j else self.src_vocab.END_TOK.i) for sent in input_batch])
+            wids_reversed.append([(self.src_vocab[sent[len(sent)-j-1]].i if len(sent) > j else self.src_vocab.END_TOK.i) for sent in input_batch])
             # mask = [(1 if len(sent)>j else 0) for sent in input_batch]
             # masks.append(mask)
             #tot_words += sum(mask)
@@ -407,6 +406,21 @@ class Seq2SeqBiRNNAttn(Seq2SeqBasic):
 
         return src_encodings, decoder_init
 
+    def get_encoder_cell_state(self, src_seq, src_seq_rev):
+        forward_states = self.enc_fwd_network.initial_state().add_inputs(src_seq)
+        backward_states = self.enc_bwd_network.initial_state().add_inputs(src_seq_rev)[::-1]
+
+        forward_cells = []
+        backward_cells = []
+
+        for forward_state, backward_state in zip(forward_states, backward_states):
+            fwd_cell, fwd_enc = forward_state.s()
+            bak_cell, bak_enc = backward_state.s()
+
+            forward_cells.append(fwd_cell)
+            backward_cells.append(bak_cell)
+
+        return forward_cells, backward_cells[::-1]
 
     def attend(self, input_vectors, state, batch_size):
 
@@ -545,23 +559,38 @@ class Seq2SeqBiRNNAttn(Seq2SeqBasic):
         translations = []
         references = []
         empty = True
-        f = open(directory_name + "/" + str(filename) + "_" + str(epoch) + "_" + str(val_idx) + ".txt", "a")
+        f = open(directory_name + "/" + str(filename) + "_" + str(epoch) + "_" + str(val_idx) + ".txt", "w")
         idx = 0
-        dec_plot = []
-        sents = []
+        cell_states = []
+        lang_list = []
+
         for src_sent, tgt_sent in test_data:
+            lang_code = src_sent[1]
+            if len(lang_code) == 2:
+                lang = pycountry.languages.get(alpha_2=lang_code)
+            else:
+                lang = pycountry.languages.get(alpha_3=lang_code)
+
+            if lang is None:
+                if lang_code == "jap":
+                    lang_list.append("Japanese")
+                else:
+                    lang_list.append("unknown language")
+            else:
+                lang_list.append(lang.name)
+
             dynet.renew_cg()           
             wids = [self.src_vocab[tok].i for tok in src_sent]
             embedded_seq = self.embed_seq(wids)
             embedded_seq_rev = embedded_seq[::-1]
-            src_encodings, decoder_init = self.encode_batch_seq(embedded_seq, embedded_seq_rev)
-            
+
+            forward_cells, backward_cells = self.get_encoder_cell_state(embedded_seq, embedded_seq_rev)
+            cell_states.append([dynet.concatenate([fwd, bwd]).npvalue() for fwd, bwd in zip(forward_cells, backward_cells)])
+
             h, src_encodings = self.beam_translate(src_sent, self.args.beam_size)
             h = h[0]
             alpha = h.alpha
             sample = h.y
-            decoder_init = [enc.npvalue() for enc in decoder_init]
-            # dec_plot = [dec[cell_idx] for dec in decoder_init]
             src = [self.src_vocab[tok].s for tok in src_sent[1:]]
             tgt = [self.tgt_vocab[tok].s for tok in tgt_sent]
             hyp = [self.tgt_vocab[tok].s for tok in sample]
@@ -577,12 +606,13 @@ class Seq2SeqBiRNNAttn(Seq2SeqBasic):
 
             # last_encs[idx] = src_encodings[-1]
             #util.heatmap(src, tgt, alpha, idx)
-            sents.append(src)
-            dec_plot.append([dec[cell_idx] for dec in decoder_init])
             #util.plot_trajectories(sent, np.asarray(dec_plot), idx)
             #util.plot_nodes(src, src_encodings, idx)
             idx += 1
-        util.plot_sent_trajectories(directory_name, sents, dec_plot)
+
+
+
+        util.plot_sent_trajectories(directory_name, cell_states, lang_list, cell_idx)
         if empty:
             return 0.0, translations
         #mean = np.mean(last_encs, axis=0)

@@ -1,6 +1,7 @@
 # coding: utf-8
 from __future__ import absolute_import, print_function
 from collections import defaultdict
+import dynet
 from itertools import count
 import numpy as np
 import math, ast, os, codecs, string
@@ -57,7 +58,7 @@ def heatmap(src_sent, tgt_sent, att_weights, idx):
     plt.close()
 
 
-def plot_trajectories(src_sent, src_encoding, idx):
+def plot_trajectories(directory_name, src_sent, src_encoding, idx):
     
     # encoding is (time_steps, hidden_dim)
     #pca = PCA(n_components=1)
@@ -68,34 +69,25 @@ def plot_trajectories(src_sent, src_encoding, idx):
     plt.title(" ".join(src_sent))
     plt.xlabel('timestep')
     plt.ylabel('trajectories')
-    plt.savefig("misc_hidden_cell_trajectories_"+str(idx), bbox_inches="tight")
+    plt.savefig(directory_name + "/misc_hidden_cell_trajectories_"+str(idx), bbox_inches="tight")
     plt.close()
 
 
-def plot_sent_trajectories(directory_name, sents, decode_plot):
-   
-    font = {'family': 'normal', 'size': 14}
-
-
-    matplotlib.rc('font', **font) 
-    i = 0    
-    l = ["Portuguese","Catalan"]
+def plot_sent_trajectories(directory_name, cell_states, lang_list, cell_idx):
     
-    axes = plt.gca()
-    #axes.set_xlim([xmin,xmax])
-    axes.set_ylim([-1,1])
+    # axes = plt.gca()
+    # axes.set_xlim([xmin,xmax])
+    # axes.set_ylim([-1,1])
+    for i in range(len(lang_list)):
+        times = np.arange(len(cell_states[i]))
+        state = [cell_states[i][j][cell_idx] for j in range(len(cell_states[i]))]
+        plt.plot(times, state, label=lang_list[i])
 
-    for sent, enc in zip(sents, decode_plot):
-        if i == 2: break
-        i += 1
-        #times = np.arange(len(enc))
-        times = np.linspace(0,1,len(enc))
-        plt.plot(times, enc, label=l[i-1])
     plt.title("Hidden Node Trajectories")
     plt.xlabel('timestep')
     plt.ylabel('trajectories')
     plt.legend(loc='best')
-    plt.savefig(directory_name + "/" + "cr_por_cat_hidden_cell_trajectories", bbox_inches="tight")
+    plt.savefig(directory_name + "/cr_por_cat_hidden_cell_trajectories", bbox_inches="tight")
     plt.close()
 
 def itersubclasses(cls, _seen=None):

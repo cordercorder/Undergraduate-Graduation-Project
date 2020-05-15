@@ -1,4 +1,4 @@
-# nohup sh run_trainer.sh >./train_logs/combined_all_data_bpe_log_lstm.txt 2>&1 &
+# nohup bash run_trainer.sh >./train_logs/combined_all_data_bpe_log_lstm.txt 2>&1 &
 python -u trainer.py \
     --dynet-gpu \
     --input_dim 512 \
