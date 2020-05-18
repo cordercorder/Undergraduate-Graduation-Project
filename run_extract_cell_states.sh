@@ -1,0 +1,16 @@
+python -u trainer.py \
+    --dynet-devices CPU,GPU:2 \
+    --input_dim 512 \
+    --hidden_dim 512 \
+    --model_type attention \
+    --minibatch_size 32 \
+    --reader_mode parallel \
+    --train_src /data/rrjin/Graduation/data/bible-corpus/eval_data/eval_jap_zh_src1.txt \
+    --train_tgt /data/rrjin/Graduation/data/bible-corpus/eval_data/eval_jap_zh_tgt1.txt \
+    --test_src /data/rrjin/Graduation/data/bible-corpus/extract_lang_vec_data/data_src.txt \
+    --test_tgt /data/rrjin/Graduation/data/bible-corpus/extract_lang_vec_data/data_tgt.txt \
+    --trainer adam \
+    --load bible_model_final_combine_all_data_bpe \
+    --extract_cell_states /data/rrjin/Graduation/data/cell_states \
+    --sentence_num 200 \
+    --prefix_name cell_states_

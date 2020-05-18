@@ -18,8 +18,11 @@ def get_language_codes():
 
 
 language_codes = get_language_codes()
-source_dir = "/data/rrjin/Graduation/data/language_vector"
-prefix = "combine_all_data_bpe_"
+# source_dir = "/data/rrjin/Graduation/data/language_vector"
+source_dir = "/data/rrjin/Graduation/data/cell_states"
+
+# prefix = "combine_all_data_bpe_"
+prefix = "cell_states_"
 
 p = [os.path.join(source_dir, prefix + language + ".npy") for language in language_codes]
 
@@ -42,5 +45,7 @@ ax.set_xlabel("X")
 ax.set_ylabel("Y")
 ax.set_zlabel("Z")
 
-plt.savefig("reduce_dim_all_language_3.png")
+# plt.savefig("reduce_dim_all_language_3.png")
+
+plt.savefig("reduce_dim_all_language_cell_states_3.png")
 plt.show()

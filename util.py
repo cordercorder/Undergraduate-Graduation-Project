@@ -11,10 +11,8 @@ import sys, io, glob
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
-#import seaborn as sns
-# from pandas import DataFrame
-#from matplotlib import rc
-from sklearn.decomposition import PCA
+import matplotlib.ticker as ticker
+from matplotlib.font_manager import *
 
 # flatten = lambda l:[item for sublist in l for item in sublist]
 # recursive_flatten = lambda l:flatten([recursive_flatten(item) if isinstance(item, list) else [item] for item in l])
@@ -41,20 +39,29 @@ def sortbylength(src, tgt, maxlen):
     sorted_tgt = [tgt[i] for i in sort_order]
     return sorted_src, sorted_tgt
 
-def heatmap(src_sent, tgt_sent, att_weights, idx):
 
-    plt.figure(figsize=(8, 6), dpi=80)
+def heatmap(directory_name, src_sent, tgt_sent, att_weights, idx):
+
+    # plt.figure(figsize=(len(tgt_sent), len(src_sent)), dpi=80)
+    # plt.rcParams['font.sans-serif'] = ['SimHei']  # 用来正常显示中文标签
+    # plt.rcParams['font.sans-serif'] = ['SimHei']  # 用来正常显示中文标签
+
+    myfont = FontProperties(fname="/usr/share/fonts/truetype/droid/DroidSansFallbackFull.ttf")
+    matplotlib.rcParams["axes.unicode_minus"] = False
+
     att_probs = np.stack(att_weights, axis=1)
-    
-    plt.imshow(att_weights, cmap='gray', interpolation='nearest')
-    #src_sent = [ str(s) for s in src_sent]
-    #tgt_sent = [ str(s) for s in tgt_sent]
-    #plt.xticks(range(0, len(tgt_sent)), tgt_sent, rotation='vertical')
-    #plt.yticks(range(0, len(src_sent)), src_sent)
-    plt.xticks(range(0, len(tgt_sent)), "")
-    plt.yticks(range(0, len(src_sent)), "")
-    plt.axis('off')
-    plt.savefig("att_matrix_"+str(idx), bbox_inches='tight')
+    print("src:{}".format(src_sent))
+    fig = plt.figure()
+    ax = fig.add_subplot(111)
+    cax = ax.matshow(att_probs, cmap="bone")
+    fig.colorbar(cax)
+    ax.set_xticklabels(tgt_sent, rotation=90)
+    ax.set_yticklabels(src_sent, fontproperties=myfont)
+
+    ax.xaxis.set_major_locator(ticker.MultipleLocator(1))
+    ax.yaxis.set_major_locator(ticker.MultipleLocator(1))
+
+    plt.savefig(directory_name + "/att_matrix_"+str(idx), bbox_inches='tight')
     plt.close()
 
 

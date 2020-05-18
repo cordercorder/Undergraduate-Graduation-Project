@@ -30,9 +30,17 @@ for key, value in language_dir.items():
     if value == 0:
         print("Error2!")
         if len(key) == 2:
-            lang = pycountry.languages.get(alpha_2 = key)
+            lang = pycountry.languages.get(alpha_2 = key).name
         else:
-            lang = pycountry.languages.get(alpha_3 = key)
-        print("language {}, language_id {}".format(lang, key))
+            lang = pycountry.languages.get(alpha_3 = key).name
+        print("language: {}, language_id: {}".format(lang, key))
 
 print("ok")
+
+for key, value in language_dir.items():
+    print("key is:{}, value is:{}".format(key, value))
+
+
+# output is :
+# language: Scottish Gaelic, language_id: gd
+# Potawatomi, language_id: pot

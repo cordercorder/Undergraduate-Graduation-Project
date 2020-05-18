@@ -60,11 +60,16 @@ class Seq2SeqBasic(Seq2SeqTemplate):
         with open(path+"/args", "wb") as f: pickle.dump(self.args, f)
 
     @classmethod
-    def load(cls, model, train_data_src, train_data_tgt, path):
-        if not os.path.exists(path): raise Exception("Model "+path+" does not exist")
+    def load(cls, model, train_data_src, train_data_tgt, path, eval):
+        if not os.path.exists(path):
+            raise Exception("Model "+path+" does not exist")
         src_vocab = util.Vocab.load(path+"/vocab.src")
         tgt_vocab = util.Vocab.load(path+"/vocab.tgt")
-        with open(path+"/args", "rb") as f: args = pickle.load(f)
+        with open(path+"/args", "rb") as f:
+            args = pickle.load(f)
+            if eval:
+                args.dropout = 0
+                print("No dropout")
         s2s = cls(model, src_vocab, tgt_vocab, args)
         s2s.m.populate(path+"/params")
         return s2s
@@ -605,14 +610,13 @@ class Seq2SeqBiRNNAttn(Seq2SeqBasic):
                    "Generated: ", u" ".join(hyp[1:-1])+"\n"])
 
             # last_encs[idx] = src_encodings[-1]
-            #util.heatmap(src, tgt, alpha, idx)
+            util.heatmap(directory_name, src_sent, hyp, alpha, idx)
             #util.plot_trajectories(sent, np.asarray(dec_plot), idx)
             #util.plot_nodes(src, src_encodings, idx)
             idx += 1
 
+        # util.plot_sent_trajectories(directory_name, cell_states, lang_list, cell_idx)
 
-
-        util.plot_sent_trajectories(directory_name, cell_states, lang_list, cell_idx)
         if empty:
             return 0.0, translations
         #mean = np.mean(last_encs, axis=0)
@@ -726,3 +730,31 @@ class Seq2SeqBiRNNAttn(Seq2SeqBasic):
         for i, item in enumerate(embedding):
 
             np.save(os.path.join(lvs_directory, prefix_name + word_list[i]), item.npvalue())
+
+    def write_cell_states(self, test_data, lvs_directory, sentence_num, prefix_name):
+        if not os.path.isdir(lvs_directory):
+            os.makedirs(lvs_directory)
+
+        cell_states = {}
+        for src_sent, tgt_sent in test_data:
+            lang_code = src_sent[1]
+            dynet.renew_cg()
+            wids = [self.src_vocab[tok].i for tok in src_sent]
+            embedded_seq = self.embed_seq(wids)
+            embedded_seq_rev = embedded_seq[::-1]
+
+            forward_cells, backward_cells = self.get_encoder_cell_state(embedded_seq, embedded_seq_rev)
+
+            sum = np.zeros((len(forward_cells), 1024))
+            for i, (fwd, bwd) in enumerate(zip(forward_cells, backward_cells)):
+                tmp = dynet.concatenate([fwd, bwd]).npvalue()
+                sum[i] = tmp
+
+            if cell_states.get(lang_code, None) is None:
+                cell_states[lang_code] = np.mean(sum, axis=0)
+            else:
+                cell_states[lang_code] += np.mean(sum, axis=0)
+
+        for key, value in cell_states.items():
+            value /= sentence_num
+            np.save(os.path.join(lvs_directory, prefix_name + key), value)

@@ -31,8 +31,11 @@ parser.add_argument("--output_file_name", required=True)
 args, unknown = parser.parse_known_args()
 
 language_codes_dir = "/data/rrjin/Graduation/data/bible-corpus/parallel_text"
-source_dir = "/data/rrjin/Graduation/data/language_vector"
-prefix = "combine_all_data_bpe_"
+# source_dir = "/data/rrjin/Graduation/data/language_vector"
+source_dir = "/data/rrjin/Graduation/data/cell_states"
+
+# prefix = "combine_all_data_bpe_"
+prefix = "cell_states_"
 
 langcode_to_alpha3 = {"jap": "jpn"}
 features_langvec = {"jpn": np.load(os.path.join(source_dir, prefix + "jap" + ".npy"))}
