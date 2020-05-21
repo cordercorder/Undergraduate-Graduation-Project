@@ -30,8 +30,8 @@ parser.add_argument("--reader_mode", default="parallel") # format of corpus (par
 parser.add_argument("--percent_valid", default=3000, type=int)
 
 ## vocab parameters
-parser.add_argument('--rebuild_vocab', action='store_true')
-parser.add_argument('--unk_thresh', default=2, type=int)
+parser.add_argument("--rebuild_vocab", action="store_true")
+parser.add_argument("--unk_thresh", default=2, type=int)
 
 ## rnn parameters
 parser.add_argument("--layers", default=1, type=int)
@@ -47,7 +47,8 @@ parser.add_argument("--loss_function", default="cross_entropy")
 parser.add_argument("--extract_lvs", type=str)
 parser.add_argument("--prefix_name")
 parser.add_argument("--word_list", nargs="+")
-parser.add_argument("--extract_cell_states")
+parser.add_argument("--extract_states")
+parser.add_argument("--cell_state", action="store_true")
 parser.add_argument("--sentence_num", type=int)
 
 ## experiment parameters
@@ -134,7 +135,7 @@ valid_data_src, valid_data_tgt = util.sortbylength(valid_data_src, valid_data_tg
 S2SModel = s2s.get_s2s(args.model_type)
 if args.load:
     print("Loading existing model...")
-    s2s = S2SModel.load(model, train_data_src, train_data_tgt, args.load, args.eval or args.extract_lvs or args.extract_cell_states)
+    s2s = S2SModel.load(model, train_data_src, train_data_tgt, args.load, args.eval or args.extract_lvs or args.extract_states)
     src_vocab = s2s.src_vocab
     tgt_vocab = s2s.tgt_vocab
 else:
@@ -156,12 +157,12 @@ else:
     s2s = S2SModel(model, src_vocab, tgt_vocab, args)
     print("...done!")
 
-if args.extract_cell_states:
-    print("Writing cell states...")
+if args.extract_states:
     test_data_src = list(util.get_reader(args.reader_mode)(args.test_src, mode=args.reader_mode, begin=BEGIN_TOKEN, end=END_TOKEN))
     test_data_tgt = list(util.get_reader(args.reader_mode)(args.test_tgt, mode=args.reader_mode, begin=BEGIN_TOKEN, end=END_TOKEN))
     test_data = zip(test_data_src, test_data_tgt)
-    s2s.write_cell_states(test_data, args.extract_cell_states, args.sentence_num, args.prefix_name)
+    print("Writing cell states..." if args.cell_state else "Writing hidden states...")
+    s2s.write_cell_states_or_hidden_states(test_data, args.extract_states, args.sentence_num, args.prefix_name, args.cell_state)
     sys.exit("...done.")
 
 if args.extract_lvs:

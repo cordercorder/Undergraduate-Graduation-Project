@@ -411,21 +411,30 @@ class Seq2SeqBiRNNAttn(Seq2SeqBasic):
 
         return src_encodings, decoder_init
 
-    def get_encoder_cell_state(self, src_seq, src_seq_rev):
+    def get_encoder_cell_states_or_hidden_states(self, src_seq, src_seq_rev, flag):
+        # if flag if true, return cell states, else return hidden states
+
         forward_states = self.enc_fwd_network.initial_state().add_inputs(src_seq)
         backward_states = self.enc_bwd_network.initial_state().add_inputs(src_seq_rev)[::-1]
 
-        forward_cells = []
-        backward_cells = []
+        forward_cells, backward_cells = [], []
+        forward_hidden_states, backward_hidden_states = [], []
 
         for forward_state, backward_state in zip(forward_states, backward_states):
             fwd_cell, fwd_enc = forward_state.s()
             bak_cell, bak_enc = backward_state.s()
 
-            forward_cells.append(fwd_cell)
-            backward_cells.append(bak_cell)
+            if flag:
+                forward_cells.append(fwd_cell)
+                backward_cells.append(bak_cell)
+            else:
+                forward_hidden_states.append(fwd_enc)
+                backward_hidden_states.append(bak_enc)
 
-        return forward_cells, backward_cells[::-1]
+        if flag:
+            return forward_cells, backward_cells[::-1]
+        else:
+            return forward_hidden_states, backward_hidden_states[::-1]
 
     def attend(self, input_vectors, state, batch_size):
 
@@ -731,11 +740,11 @@ class Seq2SeqBiRNNAttn(Seq2SeqBasic):
 
             np.save(os.path.join(lvs_directory, prefix_name + word_list[i]), item.npvalue())
 
-    def write_cell_states(self, test_data, lvs_directory, sentence_num, prefix_name):
+    def write_cell_states_or_hidden_states(self, test_data, lvs_directory, sentence_num, prefix_name, flag):
         if not os.path.isdir(lvs_directory):
             os.makedirs(lvs_directory)
 
-        cell_states = {}
+        states = {}
         for src_sent, tgt_sent in test_data:
             lang_code = src_sent[1]
             dynet.renew_cg()
@@ -743,18 +752,20 @@ class Seq2SeqBiRNNAttn(Seq2SeqBasic):
             embedded_seq = self.embed_seq(wids)
             embedded_seq_rev = embedded_seq[::-1]
 
-            forward_cells, backward_cells = self.get_encoder_cell_state(embedded_seq, embedded_seq_rev)
+            forward, backward = self.get_encoder_cell_states_or_hidden_states(embedded_seq, embedded_seq_rev, flag)
 
-            sum = np.zeros((len(forward_cells), 1024))
-            for i, (fwd, bwd) in enumerate(zip(forward_cells, backward_cells)):
+            sum = np.zeros((len(forward), 1024))
+            for i, (fwd, bwd) in enumerate(zip(forward, backward)):
                 tmp = dynet.concatenate([fwd, bwd]).npvalue()
+
+                assert tmp.shape[0] == 1024
                 sum[i] = tmp
 
-            if cell_states.get(lang_code, None) is None:
-                cell_states[lang_code] = np.mean(sum, axis=0)
+            if states.get(lang_code, None) is None:
+                states[lang_code] = np.mean(sum, axis=0)
             else:
-                cell_states[lang_code] += np.mean(sum, axis=0)
+                states[lang_code] += np.mean(sum, axis=0)
 
-        for key, value in cell_states.items():
+        for key, value in states.items():
             value /= sentence_num
             np.save(os.path.join(lvs_directory, prefix_name + key), value)

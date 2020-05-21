@@ -1,7 +1,7 @@
+import pycountry
 import os
 import numpy as np
 import argparse
-import pycountry
 import lang2vec.lang2vec as l2v
 from sklearn import preprocessing, neighbors, linear_model, multioutput
 
@@ -28,19 +28,30 @@ def check_alpha3(alpha3):
 parser = argparse.ArgumentParser()
 parser.add_argument("--feature_name", required=True)
 parser.add_argument("--output_file_name", required=True)
+parser.add_argument("--source_dir", nargs="+")  # position of language vectors
+parser.add_argument("--prefix", nargs="+")
+
 args, unknown = parser.parse_known_args()
 
 language_codes_dir = "/data/rrjin/Graduation/data/bible-corpus/parallel_text"
-# source_dir = "/data/rrjin/Graduation/data/language_vector"
-# source_dir = "/data/rrjin/Graduation/data/cell_states"
-source_dir = "/data/rrjin/Graduation/data/hidden_states"
 
-# prefix = "combine_all_data_bpe_"
-# prefix = "cell_states_"
-prefix = "hidden_states_"
+
+source_dir = args.source_dir
+prefix = args.prefix
+
+assert len(prefix) == len(source_dir)
 
 langcode_to_alpha3 = {"jap": "jpn"}
-features_langvec = {"jpn": np.load(os.path.join(source_dir, prefix + "jap" + ".npy"))}
+
+
+def get_combine_features(langcode):
+    ans = []
+    for i in range(len(prefix)):
+        ans.append(np.load(os.path.join(source_dir[i], prefix[i] + langcode + ".npy")))
+    return np.concatenate(ans)
+
+
+features_langvec = {"jpn": get_combine_features("jap")}
 
 
 for lang in os.listdir(language_codes_dir):
@@ -53,15 +64,17 @@ for lang in os.listdir(language_codes_dir):
         langcode_to_alpha3[language1] = language1_alpha3
 
         if language1 != "en":
-            p = os.path.join(source_dir, prefix + language1 + ".npy")
-            features_langvec[language1_alpha3] = np.load(p)
+
+            tmp = get_combine_features(language1)
+            features_langvec[language1_alpha3] = tmp
 
     if check_alpha3(language2_alpha3):
         langcode_to_alpha3[language2] = language2_alpha3
 
         if language2 != "en":
-            p = os.path.join(source_dir, prefix + language2 + ".npy")
-            features_langvec[language2_alpha3] = np.load(p)
+
+            tmp = get_combine_features(language2)
+            features_langvec[language2_alpha3] = tmp
 
 langcode_to_alpha3.pop("en")
 
@@ -80,7 +93,6 @@ train_data_rate = 0.7
 score_dict = {}
 
 f = open(os.path.join(os.getcwd(), args.output_file_name), "w")
-
 
 for feat in range(len(features["CODE"])):
     Y = [features[lang][feat] if features[lang][feat] != "--" else -1 for lang in lang_alpha3]

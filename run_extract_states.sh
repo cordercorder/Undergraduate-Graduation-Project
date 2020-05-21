@@ -11,6 +11,6 @@ python -u trainer.py \
     --test_tgt /data/rrjin/Graduation/data/bible-corpus/extract_lang_vec_data/data_tgt.txt \
     --trainer adam \
     --load bible_model_final_combine_all_data_bpe \
-    --extract_cell_states /data/rrjin/Graduation/data/cell_states \
+    --extract_states /data/rrjin/Graduation/data/hidden_states \
     --sentence_num 200 \
-    --prefix_name cell_states_
+    --prefix_name hidden_states_
