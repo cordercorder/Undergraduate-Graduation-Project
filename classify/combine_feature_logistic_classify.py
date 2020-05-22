@@ -47,7 +47,9 @@ langcode_to_alpha3 = {"jap": "jpn"}
 def get_combine_features(langcode):
     ans = []
     for i in range(len(prefix)):
-        ans.append(np.load(os.path.join(source_dir[i], prefix[i] + langcode + ".npy")))
+        p = os.path.join(source_dir[i], prefix[i] + langcode + ".npy")
+        assert os.path.exists(p)
+        ans.append(np.load(p))
     return np.concatenate(ans)
 
 
