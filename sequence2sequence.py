@@ -392,6 +392,10 @@ class Seq2SeqBiRNNAttn(Seq2SeqBasic):
 
     def encode_batch_seq(self, src_seq, src_seq_rev):
 
+        # src_seq: (maxSentLength, embedding_size, batch_size)
+        # src_seq_rev: (maxSentLength, embedding_size, batch_size)
+
+        # forward_states: (maxSentLength, hidden_dim, batch_size)
         forward_states = self.enc_fwd_network.initial_state().add_inputs(src_seq)
         backward_states = self.enc_bwd_network.initial_state().add_inputs(src_seq_rev)[::-1]
 
@@ -409,6 +413,8 @@ class Seq2SeqBiRNNAttn(Seq2SeqBasic):
         decoder_init = dynet.concatenate([forward_cells[-1], backward_cells[0]])
         # decoder_all = [dynet.concatenate([fwd, bwd]) for fwd, bwd in zip(forward_cells, list(reversed(backward_cells)))]
 
+        # src_encoding: (maxSentLength, embedding_size * 2, batch_size)
+        # decoder_init: (embedding_size * 2, batch_size)
         return src_encodings, decoder_init
 
     def get_encoder_cell_states_or_hidden_states(self, src_seq, src_seq_rev, flag):
@@ -437,14 +443,16 @@ class Seq2SeqBiRNNAttn(Seq2SeqBasic):
             return forward_hidden_states, backward_hidden_states[::-1]
 
     def attend(self, input_vectors, state, batch_size):
-
+        # w1: (attention_dim, embedding_size * 2)
         w1 = dynet.parameter(self.attention_w1)
+        # w2: (attention_dim, embedding_size)
         w2 = dynet.parameter(self.attention_w2)
+        # v: (1, attention_dim)
         v = dynet.parameter(self.attention_v)
 
         src_len = len(input_vectors)
 
-        # enc_size, sent_len, batch_size
+        # (embedding_size * 2, maxSentLength, batch_size)
         src_enc_all = dynet.concatenate_cols(input_vectors)
 
         att_hidden = dynet.tanh(dynet.colwise_add(w1 * src_enc_all, w2 * state))
@@ -483,15 +491,28 @@ class Seq2SeqBiRNNAttn(Seq2SeqBasic):
 
 
     def decode_batch(self, encoding, output_batch, decoder_init, input_batch):
+        # encoding: (maxSentLength, embedding_size * 2, batch_size)
+        # output_batch: (sentence_num, sentence_length)
+        # decoder_init: (embedding_size * 2, batch_size)
+        # input_batch: (sentence_num, sentence_length)
 
+        # W_s: (embedding_size, embedding_size * 2)
         W_s = dynet.parameter(self.W_s)
+        # b_s: (embedding_size, )
         b_s = dynet.parameter(self.b_s)
+        # W_h: (embedding_size, embedding_size * 3)
         W_h = dynet.parameter(self.W_h)
+        # b_h: (embedding_size)
         b_h = dynet.parameter(self.b_h)
+        # W_y: (tgt_vocab_size, embedding_size)
         W_y = dynet.parameter(self.decoder_w)
+        # b_y: (tgt_vocab_size)
         b_y = dynet.parameter(self.decoder_b)
 
         maxSentLength = max([len(sent) for sent in output_batch])
+
+        # wids: (maxSentLength, batch_size)
+        # masks: (maxSentLength, batch_size)
         wids = []
         masks = []
         for j in range(maxSentLength):
@@ -499,8 +520,9 @@ class Seq2SeqBiRNNAttn(Seq2SeqBasic):
             mask = [(1 if len(sent)>j else 0) for sent in output_batch]
             masks.append(mask)
 
-
+        # decoder_init_cell: (embedding_size, batch_size)
         decoder_init_cell = dynet.affine_transform([b_s, W_s, decoder_init])
+
         s = self.dec_network.initial_state([decoder_init_cell, dynet.tanh(decoder_init_cell)])
         # s = self.dec_network.initial_state.add_input([decoder_init_cell, dynet.tanh(decoder_init_cell)])
         ctx_tm1 = dynet.vecInput(self.args.hidden_dim * 2)
@@ -508,9 +530,16 @@ class Seq2SeqBiRNNAttn(Seq2SeqBasic):
 
         # start from <S>, until y_{T-1}
         for t, (y_ref_t, mask_t) in enumerate(zip(wids[1:], masks[1:]), start=1):
+            # y_tm1_embed: (embedding_size, batch_size)
             y_tm1_embed = dynet.lookup_batch(self.tgt_lookup, wids[t - 1])
+
+            # x: (y_tm1_embed.shape[0] + ctx_tm1.shape[0], y_tm1_embed.shape[1])
+            # x: (embedding_size * 3, batch_size)
             x = dynet.concatenate([y_tm1_embed, ctx_tm1])
+
             s = s.add_input(x)
+
+            # h_t:(embedding_size, batch_size)
             h_t = s.output()
             ctx_t, alpha_t = self.attend(encoding, h_t, len(output_batch))
 
@@ -535,6 +564,9 @@ class Seq2SeqBiRNNAttn(Seq2SeqBasic):
 
     def get_batch_loss(self, input_batch, output_batch):
 
+        # input_batch: (sentence_num, sentence_length)
+        # output_batch: (sentence_num, sentence_length)
+
         dynet.renew_cg()
 
         # Dimension: maxSentLength * minibatch_size
@@ -550,8 +582,14 @@ class Seq2SeqBiRNNAttn(Seq2SeqBasic):
         for j in range(maxSentLength):
             wids.append([(self.src_vocab[sent[j]].i if len(sent)>j else self.src_vocab.END_TOK.i) for sent in input_batch])
 
+        # wids: (maxSentLength, batch_size)
+        # embedded_batch: (maxSentLength, embedding_size, batch_size)
+
         embedded_batch = self.embed_batch_seq(wids)
         embedded_batch_reverse = embedded_batch[::-1]
+
+        # encoded_batch: (maxSentLength, embedding_size * 2, batch_size)
+        # decoder_init: (embedding_size * 2, batch_size)
         encoded_batch, decoder_init = self.encode_batch_seq(embedded_batch, embedded_batch_reverse)
 
         # pass all hidden states of encoder to decoder (for attention)
@@ -598,7 +636,7 @@ class Seq2SeqBiRNNAttn(Seq2SeqBasic):
             embedded_seq = self.embed_seq(wids)
             embedded_seq_rev = embedded_seq[::-1]
 
-            forward_cells, backward_cells = self.get_encoder_cell_state(embedded_seq, embedded_seq_rev)
+            forward_cells, backward_cells = self.get_encoder_cell_states_or_hidden_states(embedded_seq, embedded_seq_rev, True)
             cell_states.append([dynet.concatenate([fwd, bwd]).npvalue() for fwd, bwd in zip(forward_cells, backward_cells)])
 
             h, src_encodings = self.beam_translate(src_sent, self.args.beam_size)

@@ -6,10 +6,11 @@ import numpy as np
 import argparse
 import lang2vec.lang2vec as l2v
 
-source_dir = "/data/rrjin/Graduation/data/bible-corpus/parallel_text"
 parser = argparse.ArgumentParser()
 parser.add_argument("--feature_name", required=True)
 parser.add_argument("--output_file_name", required=True)
+parser.add_argument("--source_dir", nargs="+")  # position of language vectors
+parser.add_argument("--prefix", nargs="+")
 parser.add_argument("--gpu_id", required=True, type=int)
 
 args, unknown = parser.parse_known_args()
@@ -55,7 +56,6 @@ def train_epoch(model, optimizer, inputs, label):
 
     return loss
 
-
 def get_language_alpha3(language_code):
     if len(language_code) == 2:
         ans = pycountry.languages.get(alpha_2 = language_code)
@@ -75,30 +75,66 @@ def check_alpha3(alpha3):
     return False
 
 
+language_codes_dir = "/data/rrjin/Graduation/data/bible-corpus/parallel_text"
+
+
+source_dir = args.source_dir
+prefix = args.prefix
+
+assert len(prefix) == len(source_dir)
+
 langcode_to_alpha3 = {"jap": "jpn"}
 
-for lang in os.listdir(source_dir):
+
+def get_combine_features(langcode):
+    ans = []
+    for i in range(len(prefix)):
+        p = os.path.join(source_dir[i], prefix[i] + langcode + ".npy")
+        assert os.path.exists(p)
+        ans.append(np.load(p))
+    return np.concatenate(ans)
+
+
+features_langvec = {"jpn": get_combine_features("jap")}
+
+
+for lang in os.listdir(language_codes_dir):
     # Get ISO 639-3 codes according to abbreviations of languages
     s = lang[:-4]
     language1, language2 = s.split("-")
     language1_alpha3, language2_alpha3 = get_language_alpha3(language1), get_language_alpha3(language2)
+
     if check_alpha3(language1_alpha3):
         langcode_to_alpha3[language1] = language1_alpha3
+
+        if language1 != "en":
+
+            tmp = get_combine_features(language1)
+            features_langvec[language1_alpha3] = tmp
+
     if check_alpha3(language2_alpha3):
         langcode_to_alpha3[language2] = language2_alpha3
 
+        if language2 != "en":
+
+            tmp = get_combine_features(language2)
+            features_langvec[language2_alpha3] = tmp
+
 langcode_to_alpha3.pop("en")
 
+
 lang_alpha3 = list(langcode_to_alpha3.values())
+
 feature_name = args.feature_name
 features = l2v.get_features(lang_alpha3, feature_name, header=True)
 
-features_geo = l2v.get_features(lang_alpha3, "geo", header=True)
-
 lang_alpha3.sort()  # fix order
 
-X = [features_geo[lang] for lang in lang_alpha3]
+
+X = [features_langvec[lang] for lang in lang_alpha3]
 train_data_rate = 0.7
+
+score_dict = {}
 
 f = open(os.path.join(os.getcwd(), args.output_file_name), "w")
 
